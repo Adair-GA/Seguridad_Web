@@ -37,6 +37,7 @@
         <div class = "container__signup">
             <h1>Modifica los datos del horoscopo de alguien con id:
                 <?php 
+                    // Se utiliza $_GET porque se pasa por el URL desde index.php, index.js (editEntry(id))
                     echo $_GET['id'];
                     include "dbconn.php";
                     $query = mysqli_query($conn, "SELECT * FROM horoscopos WHERE id = $_GET[id]")

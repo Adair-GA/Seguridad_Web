@@ -1,7 +1,7 @@
 async function update(event){
     event.preventDefault();
-    //if all the checks are true, submit the form via POST fetch to /api/signup_register.php
     sql = "UPDATE `horoscopos` SET ";
+    // Creamos una sentencia SQL a medida para acceder y modificar aquellos datos que se hayan especificado.
     sql = fill_fields(sql);
     if (sql == "UPDATE `horoscopos` SET "){
         alert("No se ha modificado ningún campo"); //al concatenar nunca se dará este caso
@@ -9,8 +9,7 @@ async function update(event){
     }
 
     id=getId();
-    //FALTA QUE RECIBA EL ID CLAVE DEL HOROSCOPO A MODIFICAR
-    sql = sql.slice(0,-1).concat(" WHERE id = ", id).concat(";") //, document.getElementById("DNISignup").getAttribute("placeholder")).concat("'");
+    sql = sql.slice(0,-1).concat(" WHERE id = ", id).concat(";") // Con slice quitamos el último carácter, que es una coma
     res = await fetch('/api/update_entry.php', {
         method: 'POST',
         body: sql
