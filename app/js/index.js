@@ -3,5 +3,6 @@ $(document).ready( function () {
 } );
 
 function editEntry(id){
-    window.location.href = '/modifyEntry.php?id=' + id;
+    // Nos llevará a modifyEntry.php con el parámetro id en el link (inseguro)
+    window.location.href = '/modifyEntry.php?id=' + id; 
 }
