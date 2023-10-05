@@ -10,7 +10,7 @@ async function update(event){
 
     id=getId();
     //FALTA QUE RECIBA EL ID CLAVE DEL HOROSCOPO A MODIFICAR
-    sql = sql.slice(0,-1).concat(" WHERE id = ").concat(id).concat(";") //, document.getElementById("DNISignup").getAttribute("placeholder")).concat("'");
+    sql = sql.slice(0,-1).concat(" WHERE id = ", id).concat(";") //, document.getElementById("DNISignup").getAttribute("placeholder")).concat("'");
     res = await fetch('/api/update_entry.php', {
         method: 'POST',
         body: sql
@@ -26,26 +26,27 @@ async function update(event){
 
 function fill_fields(sql){
     try{
-        if (replacer=document.signUp.name.value.trim()==""){
-            replacer=document.getElementById("name").getAttribute("placeholder");
+        replacer=document.signUp.name.value.trim();
+        if (replacer!=""){
+            sql = sql.concat(" nombre = '", replacer).concat("',");
         }
-        sql = sql.concat(" nombre = '", replacer).concat("',");
-
-        /*if (replacer=document.signUp.dob.value.trim()==""){
-            replacer=document.getElementById("dob").getAttribute("placeholder");
-        }
-        sql = sql.concat(" fecha_nacimiento = '", replacer).concat("',");*/
-
-        if (replacer=document.signUp.signosolar.value.trim()==""){
-            replacer=document.getElementById("signosolar").getAttribute("placeholder");
-        }
-        sql = sql.concat(" signo_solar = '", replacer).concat("',");
-
-        if (replacer=document.signUp.signolunar.value.trim()==""){
-            replacer=document.getElementById("signolunar").getAttribute("placeholder");
-        }
-        sql = sql.concat(" signo_lunar = '", replacer).concat("',");
         
+        replacer=document.signUp.dob.value.trim();
+        if (replacer!=""){
+            sql = sql.concat(" fecha_nacimiento = '", replacer).concat("',");
+        }
+        
+        replacer=document.signUp.signosolar.value.trim();
+        if (replacer!=""){
+            sql = sql.concat(" signo_solar = '", replacer).concat("',");
+        }
+        
+        replacer=document.signUp.signolunar.value.trim();
+        if (replacer!=""){
+            sql = sql.concat(" signo_lunar = '", replacer).concat("',");
+        }
+        
+        replacer=document.signUp.retrogrado.value.trim();
         if (document.signUp.retrogrado.value.trim() == 'Si'){result='1';}
         else{result='0';}
         sql = sql.concat(" mercurio_retrogrado = '", result).concat("',");
