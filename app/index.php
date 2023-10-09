@@ -94,7 +94,7 @@
                             echo "<td>$row[nombre]</td>";
                             echo "<td>$row[signo_solar]</td>";
                             // Al clickar editar, pasamos el id del elemento a editar con el fin de poder modificar la DB (id es la clave de la relación)
-                            echo "<td><button class='btn btn-danger' onclick='editEntry($row[id])'>Editar</button></td>";
+                            echo "<td><button class='btn btn-danger' onclick='editEntry($row[id])'>Editar</button> <button class='btn btn-danger' onclick='deleteEntry($row[id])'>Eliminar</button></td>";
                             echo "</tr>";
                         }
                         ?>
