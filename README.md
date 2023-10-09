@@ -1,8 +1,10 @@
+# Grupo
+Adair Gondán, Sergio Lusa Coria, Javier Arambarri Calvo
 
-# Docker LAMP
-Linux + Apache + MariaDB (MySQL) + PHP 7.2 on Docker Compose. Mod_rewrite enabled by default.
+# Desplegar proyecto mediante docker
+Se necesita Linux, Apache, MariaDB (MySQL) y PHP 7.2 en Docker Compose. A continuación se indica cómo desplegar el sistema en Docker.
 
-## Instructions
+## Instrucciones
 
 Enter the following command to start your containers:
 ```bash
@@ -14,6 +16,3 @@ To stop them, use this:
 $ docker-compose stop
 ```
 
-Feel free to make pull requests and help to improve this.
-
-If you are looking for phpMyAdmin, take a look at [this](https://github.com/celsocelante/docker-lamp/issues/2).
