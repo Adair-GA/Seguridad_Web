@@ -34,9 +34,10 @@
             <ul class="nav nav-pills">
                 <!-- Si hay una sesión iniciada, se mostrará su menú correspondiente -->
                 <!-- Si no, se mostrarán las opciones que no necesitan identificación -->
+                <li class="nav-item"><a href="createEntry.php" class="nav-link" style="color:white">Crear entrada</a></li>
                 <?php
                 if (isset($_SESSION['email'])) {
-                    echo '<li class="nav-item"><a href="createEntry.php" class="nav-link" style="color:white">Crear entrada</a></li>';
+                    //echo '<li class="nav-item"><a href="createEntry.php" class="nav-link" style="color:white">Crear entrada</a></li>';
                     echo '<li class="nav-item"><a href="modifyUserData.php" class="nav-link" style="color:white">Modificar datos</a></li>';
                     echo '<li class="nav-item"><a href="logout.php" class="btn btn-danger">Logout</a></li>';
                 } else {
