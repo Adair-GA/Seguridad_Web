@@ -10,7 +10,6 @@ function editEntry(id){
 async function deleteEntry(id){
 
     sql = "DELETE FROM horoscopos WHERE id=" + id + ";"; 
-    window.alert(sql);
     res = await fetch('/api/update_entry.php', {
         method: 'POST',
         body: sql
