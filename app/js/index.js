@@ -1,6 +1,6 @@
-$(document).ready( function () {
+/*$(document).ready( function () {
     $('#tablaHoroscopos').DataTable();
-} );
+} );*/
 
 function editEntry(id){
     // Nos llevará a modifyEntry.php con el parámetro id en el link (inseguro)
