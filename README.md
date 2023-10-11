@@ -38,7 +38,7 @@ $ sudo usermod -aG docker $USER
 $ docker run hello-world
 ```
 
-Reiniciar el sistema, y ejecutar:
+Reiniciar el sistema, y ejecutar para comprobar la correción de la instalación:
 ```bash
 $ docker run hello-world
 ```
@@ -57,6 +57,11 @@ La imagen construida a partir del Dockerfile proporcionado por el profesor:
 ```bash
 FROM php:7.2.2-apache
 RUN docker-php-ext-install mysqli
+```
+
+### Construir la imagen
+```bash
+$ docker build -t="web"
 ```
 
 ### Definición de los servicios
@@ -104,10 +109,5 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: test
       MYSQL_DATABASE: database
-```
-
-### Construir la imagen
-```bash
-$ docker build -t="web"
 ```
 
