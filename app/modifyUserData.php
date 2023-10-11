@@ -70,7 +70,7 @@
                     <label for="DNISignup" class="form-label">DNI (12345678-Z)</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder=<?php echo "$row[0]";?> onkeyup="live_checkDNI()">
                     <p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>
-                    <button type="submit" id="SignUpButton" class="btn btn-primary">Registro</button>
+                    <button type="submit" id="SignUpButton" class="btn btn-primary">Modificar</button>
             </form>
             <br>
         </div>
