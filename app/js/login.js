@@ -68,6 +68,19 @@ function checkEmail(){
 
 function checkDate(){
     var date= document.signUp.DOBSignup.value;
+    /*Validamos la fecha con la siguiente expresión Regex, que indica
+    que será un formato de:
+        4 números del 0 al 9 cada uno
+        2 números del 0 al 9 cada uno
+        2 números del 0 al 9 cada uno
+    
+    Esta expresión permite números erróneos para los meses y días (87, por ejemplo),
+    pero esto se soluciona en HTML ya que no es una casilla textbox, si no que hay
+    que elegir la fecha en un desplegable.
+
+    Por tanto, la expresión Regex nos permite para comprobar si se ha dejado alguna 
+    parte de la fecha en blanco.
+    */
     var reg = RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
 
     if (!reg.test(date)){

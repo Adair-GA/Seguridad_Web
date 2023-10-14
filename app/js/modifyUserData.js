@@ -32,17 +32,15 @@ function checkSurname(){
     return true;
 }
 
-function checkDNI(){
-    //Falta comprobar que el formato del DNI introducido sea correcto
-    
+function checkDNI(){    
     var letras = ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E','T'];
     var dni=document.signUp.dni.value.trim();
-    try {
+    try { //Obtenemos la letra
         var letraInput=dni[9].toString().toUpperCase();
     } catch (error) {
         return false;
     }
-    var dniSinLetra=dni.slice(0,8);
+    var dniSinLetra=dni.slice(0,8); //Quitamos la letra y el guión
 
     dniSinLetra=dniSinLetra%23;
     
@@ -85,6 +83,19 @@ function checkEmail(){
 
 function checkDate(){
     var date= document.signUp.DOBSignup.value;
+    /*Validamos la fecha con la siguiente expresión Regex, que indica
+    que será un formato de:
+        4 números del 0 al 9 cada uno
+        2 números del 0 al 9 cada uno
+        2 números del 0 al 9 cada uno
+    
+    Esta expresión permite números erróneos para los meses y días (87, por ejemplo),
+    pero esto se soluciona en HTML ya que no es una casilla textbox, si no que hay
+    que elegir la fecha en un desplegable.
+
+    Por tanto, la expresión Regex nos permite para comprobar si se ha dejado alguna 
+    parte de la fecha en blanco.
+    */
     var reg = RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
 
     if (date == ""){

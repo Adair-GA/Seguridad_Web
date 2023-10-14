@@ -1,4 +1,7 @@
-<?php
+<?php 
+  /*Crear la conexión con la base de datos. 
+  Este fichero nos ahorrará código, ya que para abrir una conexión será suficiente con incluir
+  el fichero*/
   $hostname = "db";
   $username = "admin";
   $password = "test";

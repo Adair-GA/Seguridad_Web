@@ -4,7 +4,7 @@ async function update(event){
     // Creamos una sentencia SQL a medida para acceder y modificar aquellos datos que se hayan especificado.
     sql = fill_fields(sql);
     if (sql == "UPDATE `horoscopos` SET "){
-        alert("No se ha modificado ningún campo"); //al concatenar nunca se dará este caso
+        alert("No se ha modificado ningún campo"); //al concatenar nunca se dará este caso, se mantiene por seguridad.
         return;
     }
 
@@ -24,8 +24,11 @@ async function update(event){
 }
 
 function fill_fields(sql){
+    /*Se genera una sentencia SQL a medida con sólo aquellos datos que se desean cambiar,
+    los datos cuyas casillas se hayan dejado en blanco no se sustituyen, menos accesos a
+    la DB*/
     try{
-        replacer=document.signUp.name.value.trim();
+        replacer=document.signUp.name.value.trim(); //.trim() elimina los espacios en blanco en ambos extremos dle string
         if (replacer!=""){
             sql = sql.concat(" nombre = '", replacer).concat("',");
         }
@@ -62,6 +65,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 })
 
 function getId(){
+    //Obtenemos el id de la entrada a modificar a través de la URL
     let params = new URLSearchParams(document.location.search);
     let id = params.get("id");
 

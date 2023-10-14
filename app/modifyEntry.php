@@ -50,7 +50,7 @@
                     <label for="EntryName" class="form-label">Nombre:</label>
                     <input type="text" class="form-control mb-3" id="EntryName" name="name" placeholder=<?php echo $row['nombre'];?>>
 
-                    <label for="EntryDOB" class="form-label">Fecha de nacimiento (<?php echo $row['fecha_nacimiento'];?>)</label>
+                    <label for="EntryDOB" class="form-label">Fecha de nacimiento (<?php echo $row['fecha_nacimiento'];?> en formato aaaa-mm-dd)</label>
                     <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()">
                     <p class="wrong_input" id="wrong_date">El formato del numero de la fecha no es correcto</p>
 

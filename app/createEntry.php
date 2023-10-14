@@ -1,4 +1,5 @@
 <?php session_start();
+//Se tiene que poder acceder sin iniciar sesión, sobra lo siguiente:
 /*if(!isset($_SESSION['email'])){
     header("Location: /login.php");
     exit;
@@ -46,8 +47,9 @@
                     <label for="EntryName" class="form-label">Nombre:</label>
                     <input type="text" class="form-control mb-3" id="EntryName" name="name">
 
-                    <label for="EntrDOB" class="form-label">Fecha de nacimiento (aaaa-mm-dd) </label>
-                    <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()">
+                    <label for="EntrDOB" class="form-label">Fecha de nacimiento</label>
+                    <input type="date" class="form-control mb-3" id="DOBEntry" name="dob" onkeyup="live_checkDate()"> 
+                    <!-- <input class="form-control mb-3" id="DOBEntry" placeholder="aaaa-mm-dd" name="dob" onkeyup="live_checkDate()"> -->
                     <p class="wrong_input" id="wrong_date">El formato del numero de la fecha no es correcto</p>
 
                     <label for="signosolar" class="form-label">Elige el signo solar:</label>

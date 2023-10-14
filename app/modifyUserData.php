@@ -64,8 +64,9 @@
                     <label for="PhoneSignup" class="form-label">Telefono (9 dígitos) </label>
                     <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder=<?php echo "$row[6]";?>>
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
-                    <label for="DOBSignup" class="form-label">Fecha de nacimiento (aaaa-mm-dd) </label>
-                    <input class="form-control mb-3" id="DOBSignup" name="dob" placeholder=<?php echo "$row[7]";?> onkeyup="live_checkDate()">
+                    <label for="DOBSignup" class="form-label">Fecha de nacimiento (<?php echo "$row[7]";?> en formato aaaa-mm-dd)</label>
+                    <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()"> 
+                    <!--<input class="form-control mb-3" id="DOBSignup" name="dob" placeholder=<?php echo "$row[7]";?> onkeyup="live_checkDate()"> -->
                     <p class="wrong_input" id="wrong_date">El formato del numero de la fecha no es correcto</p>
                     <label for="DNISignup" class="form-label">DNI (12345678-Z)</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder=<?php echo "$row[0]";?> onkeyup="live_checkDNI()">
