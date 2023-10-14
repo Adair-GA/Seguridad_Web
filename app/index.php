@@ -90,6 +90,10 @@
                         $query = mysqli_query($conn, "SELECT id, nombre, signo_solar FROM horoscopos")
                             or die (mysqli_error($conn));
                         
+                        if (mysqli_num_rows($query)==0){
+                            echo "<td colspan='3'>No hay horóscopos que mostrar. Prueba a añadir uno en 'Crear entrada' del menú superior.</td>";
+                        }else{
+
                         while ($row = mysqli_fetch_array($query)) { // Mientras haya elementos en el array
                             echo "<tr>";
                             echo "<td>$row[nombre]</td>";
@@ -97,7 +101,9 @@
                             // Al clickar editar, pasamos el id del elemento a editar con el fin de poder modificar la DB (id es la clave de la relación)
                             echo "<td><button class='btn btn-danger' onclick='editEntry($row[id])'>Editar</button> <button class='btn btn-danger' onclick='deleteEntry($row[id])'>Eliminar</button></td>";
                             echo "</tr>";
+                            }
                         }
+                        
                         ?>
                     </tbody>
                     </thead>
