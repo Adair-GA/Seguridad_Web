@@ -58,7 +58,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `usuario`, `contraseña`, `email`, `telefono`, `fecha_nacimiento`) VALUES
-('10000000-A', 'Test', 'Test', 'user', 'user', 'test@test.com', '123123123', '1970-01-01'),
+('10000000-A', 'Test', 'Test', 'user', 'user', 'test@test.com', '123123123', '1970-01-01');
 
 --
 -- Índices para tablas volcadas
