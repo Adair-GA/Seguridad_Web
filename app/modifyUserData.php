@@ -1,32 +1,33 @@
 <?php
     session_start();
-    if(!isset($_SESSION['email'])){
-        header("Location: /login.php");
+    if(!isset($_SESSION['email'])){ //Para modificar datos de usuario se tiene que estar iniciado
+        header("Location: /login.php"); //Si no está iniciado, redirección a inicio de sesión.
         exit;
     }
     include "dbconn.php";
+    //Mostraremos los datos actuales en el formulario, por lo tanto hacemos una consulta (query) a la DB.
     $query = mysqli_query($conn, "SELECT * FROM usuarios WHERE email = '$_SESSION[email]'")
     or die (mysqli_error($conn));
 
-    $row = mysqli_fetch_array($query);
+    $row = mysqli_fetch_array($query); //Pasamos la query a un array para poder trabajar con los datos.
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Login</title>
+    <title>Web Login</title> <!--Título de la pestaña--->
+
+    <!--Importar estilo CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/format_messages.css" />
+
+    <!--Importar código JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/modifyUserData.js"></script>
-    <style>
-        .wrong_input{
-            display: none; 
-            color: red; 
-            opacity: 70%; 
-            font-size: small;
-        }
-    </style>
+
+    <!--Se usa una plantilla de Bootstrap para el estilo CSS del sistema-->
+    <!--También se implementa CSS propio para un propósitos muy determinados y específicos-->
 </head>
 <body>
     <div class="container-sm">
@@ -67,7 +68,7 @@
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento (<?php echo "$row[7]";?> en formato aaaa-mm-dd)</label>
                     <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()"> 
                     <!--<input class="form-control mb-3" id="DOBSignup" name="dob" placeholder=<?php echo "$row[7]";?> onkeyup="live_checkDate()"> -->
-                    <p class="wrong_input" id="wrong_date">El formato del numero de la fecha no es correcto</p>
+                    <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
                     <label for="DNISignup" class="form-label">DNI (12345678-Z)</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder=<?php echo "$row[0]";?> onkeyup="live_checkDNI()">
                     <p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>

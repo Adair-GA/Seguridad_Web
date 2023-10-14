@@ -5,16 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Euskor&oacute;scopo</title>    
+    <title>Euskor&oacute;scopo</title> <!--Título de la pestaña--->    
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!--Importar estilo CSS, antes se empleaba DataTable de JQuery, actualmente una tabla propia-->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" /> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="css/tabla_inicio.css" />
 
+    <!--Importar código JavaScript-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     <script src="js/index.js"></script>
+
+    <!--Se usa una plantilla de Bootstrap para el estilo CSS del sistema-->
+    <!--También se implementa CSS propio para un propósitos muy determinados y específicos-->
 </head>
 
 <body style="background-image: url('images/background.webp'); background-size: cover; color: white;">
@@ -93,17 +98,15 @@
                         if (mysqli_num_rows($query)==0){
                             echo "<td colspan='3'>No hay horóscopos que mostrar. Prueba a añadir uno en 'Crear entrada' del menú superior.</td>";
                         }else{
-
-                        while ($row = mysqli_fetch_array($query)) { // Mientras haya elementos en el array
-                            echo "<tr>";
-                            echo "<td>$row[nombre]</td>";
-                            echo "<td>$row[signo_solar]</td>";
-                            // Al clickar editar, pasamos el id del elemento a editar con el fin de poder modificar la DB (id es la clave de la relación)
-                            echo "<td><button class='btn btn-danger' onclick='editEntry($row[id])'>Editar</button> <button class='btn btn-danger' onclick='deleteEntry($row[id])'>Eliminar</button></td>";
-                            echo "</tr>";
+                            while ($row = mysqli_fetch_array($query)) { // Mientras haya elementos en el array
+                                echo "<tr>";
+                                echo "<td>$row[nombre]</td>";
+                                echo "<td>$row[signo_solar]</td>";
+                                // Al clickar editar, pasamos el id del elemento a editar con el fin de poder modificar la DB (id es la clave de la relación)
+                                echo "<td><button class='btn btn-danger' onclick='editEntry($row[id])'>Editar</button> <button class='btn btn-danger' onclick=\"deleteEntry($row[id],'$row[nombre]','$row[signo_solar]')\">Eliminar</button></td>";
+                                echo "</tr>";
                             }
                         }
-                        
                         ?>
                     </tbody>
                     </thead>

@@ -7,9 +7,10 @@ function editEntry(id){
     window.location.href = '/modifyEntry.php?id=' + id; 
 }
 
-async function deleteEntry(id){
+async function deleteEntry(id,name,signo){
 
-    let confirmation = confirm("¿Deseas eliminar el horóscopo seleccionado?");
+    let confirmation = confirm("¿Deseas eliminar el horóscopo de "+name+ " con signo solar "+signo.toLowerCase()+"?"
+    + " Puedes revisar o modificar toda la información del horóscopo cancelando y clickando en el botón 'Editar' de la tabla.");
     if (confirmation){
         sql = "DELETE FROM horoscopos WHERE id=" + id + ";"; 
         res = await fetch('/api/update_entry.php', {
@@ -26,7 +27,7 @@ async function deleteEntry(id){
         }
     }
     else{
-        window.alert("ANULADO: no se ha eliminado el elemento seleccionado");
+        window.alert("ANULADO: no se ha eliminado el horóscopo de "+name+ " con signo solar "+signo.toLowerCase()+".");
     }
     
 

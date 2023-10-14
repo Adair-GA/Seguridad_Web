@@ -1,21 +1,21 @@
-<?php session_start();?>
+<?php session_start();?> <!--Permite empezar o reanudar una sesión (login) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar entrada - Euskoroscopo</title>
+    <title>Modificar entrada - Euskoroscopo</title> <!--Título de la pestaña--->  
+
+    <!--Importar estilo CSS, antes se empleaba DataTable de JQuery, actualmente una tabla propia-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/format_messages.css" />
+
+    <!--Importar código JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/modifyEntry.js"></script>
-    <style>
-        .wrong_input{
-            display: none; 
-            color: red; 
-            opacity: 70%; 
-            font-size: small;
-        }
-    </style>
+
+    <!--Se usa una plantilla de Bootstrap para el estilo CSS del sistema-->
+    <!--También se implementa CSS propio para un propósitos muy determinados y específicos-->
 </head>
 <body>
     <div class="container-sm">
@@ -52,7 +52,7 @@
 
                     <label for="EntryDOB" class="form-label">Fecha de nacimiento (<?php echo $row['fecha_nacimiento'];?> en formato aaaa-mm-dd)</label>
                     <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()">
-                    <p class="wrong_input" id="wrong_date">El formato del numero de la fecha no es correcto</p>
+                    <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
 
                     <label for="signosolar" class="form-label">Elige el signo solar:</label>
                     <select class="form-select mb-3" name="signosolar" id="signosolar">
