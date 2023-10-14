@@ -39,15 +39,15 @@
 \newline
 En esta primera entrega se ha implementado un sistema web de temática libre, en nuestro caso una web de horóscopos llamada \textbf{Euskoróscopo}, utilizando HTML, PHP, CSS y JavaScript. No se ha tratado el tema de la seguridad en esta entrega, puesto que el objetivo es realizar el sistema lo más inseguro posible con el fin de buscar, actualizar y corregir las vulnerabilidades en la siguiente entrega.\\
 \newline
-El sistema puede encontrarse en el siguiente repositorio:\\
-\href{https://github.com/Adair-GA/Seguridad_Web/tree/entrega_1}{https://github.com/Adair-GA/Seguridad\_Web/tree/entrega\_1}
+El sistema puede encontrarse en la rama \textit{entrega\_1} del siguiente repositorio:\\
+\href{https://github.com/Adair-GA/Seguridad_Web}{https://github.com/Adair-GA/Seguridad\_Web}
 \newline
 
-\chapter{Funcionamiento del sistema}
-\section{Arranque o acceso y página principal}
-Accedemos al sistema web mediante su dirección url o desplegando el sistema mediante Docker.\\ En nuestro caso, tendremos que desplegar el sistema mediante Docker.
-\newline
-Si estamos desplegando el sistema por primera vez en el dispositivo o la base de datos ha sido modificada desde el último arranque, tendremos que importar la base de datos actualizada. Es necesario tener el sistema arrancado. Todo ello está descrito en el README.md\\
+\chapter*{Uso del sistema}
+\noindent El sistema web de Euskoróscopo permitirá a los usuarios de la página online realizar las siguientes funciones: darse de alta en el sistema e iniciar sesión; modificar los datos del usuario iniciado; leer, modificar y elimar los horóscopos que hayan sido registrados y añadir horóscopos nuevos.
+\section*{Arranque o acceso y página principal}
+\noindent Accedemos al sistema web mediante su dirección url. En nuestro caso, el sistema no está implementado en ningún servidor, por lo que lo desplegaremos en ``local'' mediante Docker.
+Si estamos desplegando el sistema por primera vez en el dispositivo o la base de datos ha sido modificada desde el último arranque, tendremos que importar la base de datos actualizada. Es necesario tener el sistema arrancado. El procedimiento a seguir está en README.md del repositorio.\\
 
 \begin{comment}
 \begin{lstlisting}
@@ -88,10 +88,8 @@ Seleccionamos ``Importar'' en el menú superior, elegimos el archivo (\textit{da
 \end{figure}
 \newpage
 \end{comment}
-Accederemos al sistema web introduciendo \hyperlink{http://localhost:81/}{http://localhost:81/} en el navegador. Nos aparecerá la página principal.\\
-\newline
-En ella disponemos de un menú superior con las opciones de ``Crear entrada'' y ``Login''. Con una sesión iniciada, se mostrará la opción de ``Modificar datos'' y se sustituirá el inicio de sesión por ``Logout''. Podremos ver el número de usuarios registrados en el sistema, y una tabla con los horóscopos almacenados. \\
-También nos sale información sobre la cantidad de usuarios registrados en el sistema y una tabla con los horóscopos o entradas que se han introducido en el sistema, desde la que podremos ver los detalles de cada elemento, editarlo e incluso eliminarlo.\\
+\noindent Accederemos al sistema web introduciendo \hyperlink{http://localhost:81/}{http://localhost:81/} en el navegador. Nos aparecerá la página principal.\\
+En ella disponemos de un menú superior con las opciones de \textbf{``Crear entrada''} y \textbf{``Login''}. Con una sesión iniciada, se mostrará la opción de \textbf{``Modificar datos''} y se sustituirá el inicio de sesión por `\textbf{`Logout''}. Podremos ver el número de usuarios registrados en el sistema, y una tabla con los horóscopos almacenados. Desde la tabla podremos ver los detalles de cada horóscopo, \textbf{editarlo} e incluso \textbf{eliminarlo}.\\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.3]{images/index.png}
@@ -104,10 +102,16 @@ También nos sale información sobre la cantidad de usuarios registrados en el s
 \end{center}
 \caption{\label{inicio} Página principal con sesión iniciada.}
 \end{figure}
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.41]{images/index_empty.png}
+\end{center}
+\caption{\label{inicio} Página principal con ningún horóscopo o entrada registrada.}
+\end{figure}
 \clearpage
 
-\section{Registro e Inicio de Sesión}
-La funcionalidad tanto de registro como de identificación se ubican en la misma página, y se accede desde la página principal, pulsando sobre el botón de ``Login'' situado en la parte derecha del menú superior.
+\section*{Registro e Inicio de Sesión}
+\noindent La funcionalidad tanto de registro como de identificación se ubican en la misma página, y se accede desde la página principal, pulsando sobre el botón de \textbf{``Login''} situado en la parte derecha del menú superior.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.8]{images/index_login.png}
@@ -115,9 +119,11 @@ La funcionalidad tanto de registro como de identificación se ubican en la misma
 \caption{\label{inicio} Botón de Login.}
 \end{figure}
 \newline
-Accederemos a ambos formularios. En el formulario superior podremos iniciar sesión, y en el inferior podremos registrarnos.
+Nos aparecerán dos formularios. En el superior podremos iniciar sesión mediante un \underline{usuario o email} y la \underline{contraseña}, y en el inferior podremos \underline{registrarnos}.\\
+\newline
 Cada uno de los campos cumple con los requisitos solicitados en el enunciado de esta primera entrega del trabajo. No los mencionaremos aquí por no ser objeto de este documento.\\
-Una vez introducida la información requerida, pincharemos sobre el botón correspondiente, ``Login'' o ``Registro''.\\
+Una vez introducida la información requerida, pincharemos sobre el botón correspondiente, \textbf{``Login''} o \textbf{``Registro''}.\\
+\newline
 Existe un usuario general para poder utilizar el sistema sin registrarse:
 \begin{itemize}
     \item Usuario: \textbf{user}
@@ -144,7 +150,7 @@ Existe un usuario general para poder utilizar el sistema sin registrarse:
 \caption{\label{inicio} Formulario de Registro.}
 \end{figure}
 \clearpage
-Tanto si se introducen unos datos incorrectos de inicio de sesión como si se introduce algún dato con un formato diferente al especificado en el enunciado durante el registro, el sistema nos notificará:\\
+\noindent Tanto si se introducen unos datos incorrectos de inicio de sesión como si se introduce algún dato con un formato diferente al especificado en el enunciado durante el registro, el sistema nos lo notificará y nos pedirá corregirlo:\\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.7]{images/login_error.png}
@@ -165,9 +171,10 @@ Tanto si se introducen unos datos incorrectos de inicio de sesión como si se in
 \end{figure}
 \clearpage
 
-\section{Modificación de datos de usuario}
-Podremos modificar los datos del usuario cuya sesión está iniciada desde el menú superio.\\
-Accederemos a un formulario, como el de inicio de sesión, cuyos campos han de cumplir los mismos requisitos y en los que se muestra el valor actual. Si un dato no desea modificarse, su casilla ha de dejarse en blanco.
+\section*{Modificación de datos de usuario}
+\noindent Podremos modificar los datos del usuario cuya sesión está iniciada desde el menú superior.\\
+Accederemos a un formulario, como el de inicio de sesión, cuyos campos han de cumplir los mismos requisitos y en los que se muestra el valor actual. Si un dato no desea modificarse, su casilla ha de dejarse en blanco.\\
+Una vez introducidos los nuevo valores, pulsamos \textbf{``Modificar''}.\\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.7]{images/modifyData.png}
@@ -188,8 +195,8 @@ Accederemos a un formulario, como el de inicio de sesión, cuyos campos han de c
 \end{figure}
 \clearpage
 
-\section{Creación de una entrada}
-Para añadir un nuevo horóscopo al sistema no será necesario estar dado de alta.
+\section*{Creación de una entrada}
+\noindent Para añadir un nuevo horóscopo al sistema no será necesario estar dado de alta ni iniciada la sesión. Pulsaremos el botón \textbf{``Crear entrada''} en el menú superior de la web.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.7]{images/crearEntrada.png}
@@ -203,7 +210,7 @@ Para añadir un nuevo horóscopo al sistema no será necesario estar dado de alt
 \caption{\label{inicio} Botón para crear una nueva entrada.}
 \end{figure}
 \newline
-Accedemos al formulario en el que ingresaremos los datos de la nueva entrada, y pulsamos añadir.
+Accedemos al formulario en el que ingresaremos los datos de la nueva entrada, y pulsamos \textbf{``Añadir''}. Ninguno de los campos pueden estar vacíos.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.37]{images/crearEntrada2.png}
@@ -214,9 +221,9 @@ Accedemos al formulario en el que ingresaremos los datos de la nueva entrada, y 
 Las nuevas entradas se mostrarán en la tabla de la página principal.
 \clearpage
 
-\section{Edición de una entrada}
-Para editar una entrada existente lo haremos desde la página principal. En la tabla de los horóscopos pincharemos el botón de editar de la entrada que deseamos modificar.\\
-Accederemos al formulario de edición, que funciona de la misma manera que el de modificación de los datos del usuario registrado. Pulsaremos el botón ``Modificar'' y se actualizan los campos que se han rellenado.
+\section*{Edición de una entrada}
+\noindent Para editar una entrada existente lo haremos desde la página principal. En la tabla de los horóscopos pincharemos el botón de \textbf{``Editar''} de la entrada que deseamos modificar.\\
+Accederemos al formulario de edición, que funciona de la misma manera que el de modificación de los datos del usuario registrado. Pulsaremos el botón \textbf{``Modificar''} y se actualizan \underline{sólo} los campos que se han rellenado.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.65]{images/editarEntrada.png}
@@ -231,8 +238,8 @@ Accederemos al formulario de edición, que funciona de la misma manera que el de
 \end{figure}
 \clearpage
 
-\section{Eliminación de una entrada}
-Las entradas se eliminarán de la misma manera en que se editan, pero pulsando el botón ``Eliminar'' desde la página principal. Una vez eliminada, nos indicará que se ha realizado correctamente la actualización en el sistema.
+\section*{Eliminación de una entrada}
+\noindent Las entradas se eliminarán de la misma manera en que se editan, pero pulsando el botón \textbf{``Eliminar''} desde la página principal. Se solicita confirmación a través de una notificación ``pop-up''. Una vez eliminada, nos indicará que se ha realizado correctamente la actualización en el sistema.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.65]{images/editarEntrada.png}
@@ -241,14 +248,20 @@ Las entradas se eliminarán de la misma manera en que se editan, pero pulsando e
 \end{figure}
 \begin{figure}[h]
 \begin{center}
+\includegraphics[scale=0.65]{images/confirmación_borrar.png}
+\end{center}
+\caption{\label{inicio} Solicitud de confifación.}
+\end{figure}
+\begin{figure}[h]
+\begin{center}
 \includegraphics[scale=0.65]{images/actualización.png}
 \end{center}
-\caption{\label{inicio} Mensaje de confimación.}
+\caption{\label{inicio} Mensaje de confimación del borrado.}
 \end{figure}
 \clearpage
 
-\section{Mensajes de actualización}
-Cada vez que se actualice algún dato o se interactúe con el funcionamiento del sistema, ya sea al modificar los datos de usuario y entradas, iniciar sesión, eliminar entrada o... se mostrarán mensajes de alerta indicándolo.\\
+\section*{Mensajes de actualización}
+\noindent Cada vez que se actualice algún dato o se interactúe con el funcionamiento del sistema, ya sea al modificar los datos de usuario y entradas, iniciar sesión, eliminar entrada o... se mostrarán mensajes de alerta indicándolo.\\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[scale=0.7]{images/actualización.png}
