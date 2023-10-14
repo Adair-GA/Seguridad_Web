@@ -45,14 +45,14 @@ El sistema puede encontrarse en el siguiente repositorio:\\
 
 \chapter{Funcionamiento del sistema}
 \section{Arranque o acceso y página principal}
-Accedemos al sistema web mediante su dirección url o desplegando el sistema mediante Docker.\\ En nuestro caso, tendremos que desplegar el sistema mediante Docker siguiendo los pasos descritos en el README.md del repositorio.\\
+Accedemos al sistema web mediante su dirección url o desplegando el sistema mediante Docker.\\ En nuestro caso, tendremos que desplegar el sistema mediante Docker.
 \newline
-Si estamos desplegando el sistema por primera vez en el dispositivo o la base de datos ha sido modificada desde el último arranque, tendremos que importar la base de datos actualizada. Es necesario tener el sistema arrancado, es decir:\\
+Si estamos desplegando el sistema por primera vez en el dispositivo o la base de datos ha sido modificada desde el último arranque, tendremos que importar la base de datos actualizada. Es necesario tener el sistema arrancado. Todo ello está descrito en el README.md\\
 
+\begin{comment}
 \begin{lstlisting}
-$ docker-compose up
+$ docker-compose up -d
 \end{lstlisting}
-
 
 Para ello, accederemos a \textit{phpMyAdmin} desde \hyperlink{http://localhost:8890/}{http://localhost:8890/} en el navegador, e iniciamos sesión como administrador:
 \begin{itemize}
@@ -87,7 +87,8 @@ Seleccionamos ``Importar'' en el menú superior, elegimos el archivo (\textit{da
 \caption{\label{inicio} Finalizar importación en phpMyAdmin.}
 \end{figure}
 \newpage
-Con la base de datos actualizada, accederemos al sistema web introduciendo \hyperlink{http://localhost:81/}{http://localhost:81/} en el navegador. Nos aparecerá la página principal.\\
+\end{comment}
+Accederemos al sistema web introduciendo \hyperlink{http://localhost:81/}{http://localhost:81/} en el navegador. Nos aparecerá la página principal.\\
 \newline
 En ella disponemos de un menú superior con las opciones de ``Crear entrada'' y ``Login''. Con una sesión iniciada, se mostrará la opción de ``Modificar datos'' y se sustituirá el inicio de sesión por ``Logout''. Podremos ver el número de usuarios registrados en el sistema, y una tabla con los horóscopos almacenados. \\
 También nos sale información sobre la cantidad de usuarios registrados en el sistema y una tabla con los horóscopos o entradas que se han introducido en el sistema, desde la que podremos ver los detalles de cada elemento, editarlo e incluso eliminarlo.\\
@@ -103,8 +104,7 @@ También nos sale información sobre la cantidad de usuarios registrados en el s
 \end{center}
 \caption{\label{inicio} Página principal con sesión iniciada.}
 \end{figure}
-
-\newpage
+\clearpage
 
 \section{Registro e Inicio de Sesión}
 La funcionalidad tanto de registro como de identificación se ubican en la misma página, y se accede desde la página principal, pulsando sobre el botón de ``Login'' situado en la parte derecha del menú superior.

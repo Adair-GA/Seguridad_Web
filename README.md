@@ -111,3 +111,15 @@ services:
       MYSQL_DATABASE: database
 ```
 
+# Actualizar la base de datos desde PhPmyadmin
+Desplegamos el sistema:
+```bash
+$ docker-compose up -d
+```
+
+Accedemos a localhost:8890
+Iniciamos sesión:
+	user: admin
+	pass: test
+Seleccionamos la base de datos 'database'
+Importamos el archivo database.sql
