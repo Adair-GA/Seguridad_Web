@@ -82,7 +82,7 @@ function checkEmail(){
 }
 
 function checkDate(){
-    var date= document.signUp.DOBSignup.value;
+    var date= document.signUp.DOBSignup.value.trim();
     /*Validamos la fecha con la siguiente expresión Regex, que indica
     que será un formato de:
         4 números del 0 al 9 cada uno
@@ -98,14 +98,41 @@ function checkDate(){
     */
     var reg = RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
 
-    if (date == ""){
-        return false;
-    }
-    
     if (!reg.test(date)){
         return false;
+    }else{
+        let year=date.slice(0,4);
+        let month=date.slice(5,7);
+        let day=parseInt(date.slice(8,10));
+
+        if (month=="01" || month== "03" || month=="05" || month=="07" || month=="08" || month=="10" || month=="12"){
+            if (day>0 && day<32){
+                return true;
+            }else{
+                return false;
+            }
+        }else if (month=="02"){
+            let limit = 0;
+            if (year%400==0 && year%100==0){
+                limit=30;
+            }else{
+                limit=29;
+            }
+
+            if (day>0 && day<limit){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if (day>0 && day<31){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
-    return true;
+    
 }
 
 async function update(event){

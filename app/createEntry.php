@@ -48,7 +48,8 @@
                     <input type="text" class="form-control mb-3" id="EntryName" name="name">
 
                     <label for="EntrDOB" class="form-label">Fecha de nacimiento</label>
-                    <input type="date" class="form-control mb-3" id="DOBEntry" name="dob" onkeyup="live_checkDate()"> 
+                    <!-- <input type="date" class="form-control mb-3" id="DOBEntry" name="dob" onkeyup="live_checkDate()"> -->
+                    <input type="text" class="form-control mb-3" id="DOBSignup" placeholder="aaaa-mm-dd" name="dob" onkeyup="live_checkDate()"> 
                     <!-- <input class="form-control mb-3" id="DOBEntry" placeholder="aaaa-mm-dd" name="dob" onkeyup="live_checkDate()"> -->
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
 
@@ -84,7 +85,7 @@
                         <option value=Piscis>Piscis</option>
                     </select>
 
-                    <label for="retrogrado" class="form-label">Esta persona nació en mercurio retrogrado?</label>
+                    <label for="retrogrado" class="form-label">¿Esta persona nació en mercurio retrogrado?</label>
                     <select class="form-select mb-3" name="retrogrado" id="retrogrado">
                         <option value=No>No</option>
                         <option value=Si>Si</option>

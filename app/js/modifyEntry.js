@@ -59,6 +59,68 @@ function fill_fields(sql){
     return sql;
 }
 
+function checkDate(){
+    var date= document.signUp.DOBSignup.value.trim();
+    /*Validamos la fecha con la siguiente expresión Regex, que indica
+    que será un formato de:
+        4 números del 0 al 9 cada uno
+        2 números del 0 al 9 cada uno
+        2 números del 0 al 9 cada uno
+    
+    Esta expresión permite números erróneos para los meses y días (87, por ejemplo),
+    pero esto se soluciona en HTML ya que no es una casilla textbox, si no que hay
+    que elegir la fecha en un desplegable.
+
+    Por tanto, la expresión Regex nos permite para comprobar si se ha dejado alguna 
+    parte de la fecha en blanco.
+    */
+    var reg = RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+
+    if (!reg.test(date)){
+        return false;
+    }else{
+        let year=date.slice(0,4);
+        let month=date.slice(5,7);
+        let day=parseInt(date.slice(8,10));
+
+        if (month=="01" || month== "03" || month=="05" || month=="07" || month=="08" || month=="10" || month=="12"){
+            if (day>0 && day<32){
+                return true;
+            }else{
+                return false;
+            }
+        }else if (month=="02"){
+            let limit = 0;
+            if (year%400==0 && year%100==0){
+                limit=30;
+            }else{
+                limit=29;
+            }
+
+            if (day>0 && day<limit){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if (day>0 && day<31){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
+}
+
+function live_checkDate(){
+    if (checkDate()){
+        document.getElementById("wrong_date").style.display = "none";
+    }else{
+        document.getElementById("wrong_date").style.display = "block";
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("sendButton").addEventListener("click", update);

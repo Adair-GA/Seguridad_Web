@@ -50,8 +50,9 @@
                     <label for="EntryName" class="form-label">Nombre:</label>
                     <input type="text" class="form-control mb-3" id="EntryName" name="name" placeholder=<?php echo $row['nombre'];?>>
 
-                    <label for="EntryDOB" class="form-label">Fecha de nacimiento (<?php echo $row['fecha_nacimiento'];?> en formato aaaa-mm-dd)</label>
-                    <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()">
+                    <label for="EntryDOB" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
+                    <!-- <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()"> -->
+                    <input type="text" class="form-control mb-3" id="DOBSignup" placeholder=<?php echo $row['fecha_nacimiento'];?> name="dob" onkeyup="live_checkDate()"> 
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
 
                     <label for="signosolar" class="form-label">Elige el signo solar:</label>
@@ -86,7 +87,7 @@
                         <option value="Piscis" <?php if($row['signo_lunar'] == 'Piscis') echo 'selected'; ?>>Piscis</option>
                     </select>
 
-                    <label for="retrogrado" class="form-label">Esta persona nació en mercurio retrogrado?</label>
+                    <label for="retrogrado" class="form-label">¿Esta persona nació en mercurio retrogrado?</label>
                     <select class="form-select mb-3" name="retrogrado" id="retrogrado">
                         <option value=No>No</option>
                         <option value=Si <?php if($row['mercurio_retrogrado'] == 1) echo 'selected'; ?>>Si</option>
