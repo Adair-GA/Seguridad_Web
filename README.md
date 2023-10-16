@@ -25,7 +25,7 @@ $ docker image rm web:latest
 
 Construiremos la imagen:
 ```bash
-$ docker build -t="web"
+$ docker build -t="web" .
 ```
 
 Una vez la imagen haya sido creada (sólo es necesario crearla una vez), para arrancar el sistema completo, ejecutar en la carpeta en la que están los archivos de Docker y el proyecto:
