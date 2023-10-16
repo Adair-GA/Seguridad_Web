@@ -8,8 +8,22 @@
 # Desplegar proyecto mediante Docker
 Se necesita Linux, Apache, MariaDB (MySQL) y PHP 7.2 en Docker Compose. A continuación se indica cómo desplegar el sistema en Docker.
 
-# Resumen:
-Para arrancar por primera vez el sistema, construiremos la imagen:
+<!-- # Resumen: -->
+
+## Desplegado por primera vez:
+Clonamos el repositorio en el local en la carpeta deseada (mediante SSH), nos situamos en la carpeta y cambiamos a la rama `entrega_1'.
+```bash
+$ git clone git@github.com:Adair-GA/Seguridad_Web.git
+$ cd Seguridad_Web
+$ git checkout entrega_1
+```
+
+Borramos cualquier imagen docker con el mismo nombre que la que vamos a crear para evitar conflictos
+```bash
+$ docker image rm web:latest
+```
+
+Construiremos la imagen:
 ```bash
 $ docker build -t="web"
 ```
@@ -19,11 +33,27 @@ Una vez la imagen haya sido creada (sólo es necesario crearla una vez), para ar
 $ docker-compose up -d #-d devuelve el prompt de la terminal.
 ```
 
+Importamos la base de datos
+1. Accedemos a localhost:8890
+2. Iniciamos sesión:...
+	- user: admin...
+	- pass: test
+3. Seleccionamos la base de datos 'database'
+4. Importamos el archivo database.sql
+
 Para detener el despliegue:
 ```bash
 $ docker-compose down #o Ctrl+C
 ```
+## Desplegado rutinario
+Desplegar el sistema
+```bash
+$ docker-compose up -d #-d devuelve el prompt de la terminal.
+```
+Accedemos a http://localhost:81/ en el navegador.
 
+<!--
+----------------------------------------------------------------------------------
 # Instalación Docker
 
 Instalar docker:
@@ -122,3 +152,4 @@ $ docker-compose up -d
 	- pass: test
 4. Seleccionamos la base de datos 'database'
 5. Importamos el archivo database.sql
+-->
