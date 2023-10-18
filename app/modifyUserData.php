@@ -70,9 +70,10 @@
                     <input type="text" class="form-control mb-3" id="DOBSignup" placeholder=<?php echo "$row[7]";?> name="dob" onkeyup="live_checkDate()"> 
                     <!--<input class="form-control mb-3" id="DOBSignup" name="dob" placeholder=<?php echo "$row[7]";?> onkeyup="live_checkDate()"> -->
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
-                    <label for="DNISignup" class="form-label">DNI (12345678-Z)</label>
-                    <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder=<?php echo "$row[0]";?> onkeyup="live_checkDNI()">
-                    <p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>
+                    <label id="DNI" for="DNISignup" class="form-label">DNI: <?php echo $dni="$row[0]";?></label>
+                    <!--<input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder=<?php echo "$row[0]";?> onkeyup="live_checkDNI()">-->
+                    <!--<p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>-->
+                    <br><br>
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Modificar</button>
             </form>
             <br>

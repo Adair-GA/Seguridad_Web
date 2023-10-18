@@ -71,7 +71,7 @@
                     <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()">  -->
                     <input type="text" class="form-control mb-3" id="DOBSignup" placeholder="aaaa-mm-dd" name="dob" onkeyup="live_checkDate()"> 
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
-                    <label for="DNISignup" class="form-label">DNI</label>
+                    <label for="DNISignup" class="form-label">DNI (no podrá modificarse)</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" placeholder="12345678-Z" name="dni" onkeyup="live_checkDNI()">
                     <p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Registro</button>

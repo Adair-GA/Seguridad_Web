@@ -2,8 +2,9 @@ function checkName(){
     var name= document.signUp.name.value.trim();
 
     for (let i = 0; i < name.length; i++){
-        var ascii = name.charCodeAt(i);
-        if (ascii < 65 || ascii > 122){
+        var ascii = name.charCodeAt(i); //UTF-16
+        if ((ascii < 65 || ascii > 122) && (ascii!=32) && (ascii!=209 && ascii!=241) && (ascii!=225 && ascii!=193) && (ascii!=201 && ascii!=233) && (ascii!=205 && ascii!=237) && (ascii!=211 && ascii!=243) && (ascii!=218 && ascii!=250)){
+            //209: Ñ, 241: ñ, y vocales con tílde
             return false;
         }
         
@@ -14,8 +15,9 @@ function checkName(){
 function checkSurname(){
     var surname= document.signUp.surname.value.trim();
     for (let i = 0; i < surname.length; i++){
-        var ascii = surname.charCodeAt(i);
-        if ((ascii < 65 || ascii > 122) && (ascii != 32)){
+        var ascii = surname.charCodeAt(i); //UTF-16
+        if ((ascii < 65 || ascii > 122) && (ascii!=32) && (ascii!=209 && ascii!=241) && (ascii!=225 && ascii!=193) && (ascii!=201 && ascii!=233) && (ascii!=205 && ascii!=237) && (ascii!=211 && ascii!=243) && (ascii!=218 && ascii!=250)){
+            //209: Ñ, 241: ñ, y vocales con tílde
             return false;
         }
         
@@ -58,7 +60,7 @@ function checkTel(){
 
 function checkEmail(){
     var email= document.signUp.email.value.trim();
-    var reg = RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
+    var reg = RegExp('^[\\w-\\.\\ñ\\Ñ]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
     if (!reg.test(email)){
         return false;
