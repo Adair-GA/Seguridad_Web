@@ -149,7 +149,7 @@ async function update(event){
         alert("No se ha modificado ningún campo");
         return;
     }
-    sql = sql.slice(0,-1).concat(" WHERE dni = '", document.getElementById("DNI").textContent.slice(5,15).concat("'"));
+    sql = sql.slice(0,-1).concat(" WHERE dni = '", document.getElementById("DNISignup").getAttribute("placeholder")).concat("'");
     res = await fetch('/api/update_data.php', {
         method: 'POST',
         body: sql
