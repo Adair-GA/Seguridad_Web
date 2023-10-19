@@ -50,7 +50,7 @@
             <h1>Modificar datos</h1>
             <form name="signUp" id="signUpForm">
                     <label for="NameSignup" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control mb-3" id="NameSignup" name="name" onkeyup="live_checkName()" placeholder=<?php echo "$row[1]";?>>
+                    <input type="text" class="form-control mb-3" id="NameSignup" name="name" onkeyup="live_checkName()" placeholder="<?php echo "$row[1]";?>">
                     <p class="wrong_input" id="wrong_name">Solo caracteres alfabeticos</p>
                     <label for="ApellidosSignup" class="form-label">Apellidos:</label>
                     <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" onkeyup="live_checkSurname()" placeholder="<?php echo $row[2];?>">
