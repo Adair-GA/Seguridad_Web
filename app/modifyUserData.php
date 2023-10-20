@@ -1,12 +1,12 @@
 <?php
     session_start();
-    if(!isset($_SESSION['email'])){ //Para modificar datos de usuario se tiene que estar iniciado
+    if(!isset($_SESSION['dni'])){ //Para modificar datos de usuario se tiene que estar iniciado
         header("Location: /login.php"); //Si no está iniciado, redirección a inicio de sesión.
         exit;
     }
     include "dbconn.php";
     //Mostraremos los datos actuales en el formulario, por lo tanto hacemos una consulta (query) a la DB.
-    $query = mysqli_query($conn, "SELECT * FROM usuarios WHERE email = '$_SESSION[email]'")
+    $query = mysqli_query($conn, "SELECT * FROM usuarios WHERE dni = '$_SESSION[dni]'")
     or die (mysqli_error($conn));
 
     $row = mysqli_fetch_array($query); //Pasamos la query a un array para poder trabajar con los datos.
@@ -33,11 +33,11 @@
     <div class="container-sm">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a href="/" class="d-flex align-items-center me-md-auto link-body-emphasis text-decoration-none">
-        <span class="fs-5">Euskor&oacute;scopo<?php if(isset($_SESSION['email'])){echo ": Modificar datos del usuario $_SESSION[usuario]";}?></span>
+        <span class="fs-5">Euskor&oacute;scopo<?php if(isset($_SESSION['dni'])){echo ": Modificar datos del usuario $_SESSION[usuario]";}?></span>
         
         <ul class="nav nav-pills">
             <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-            <?php if(isset($_SESSION['email'])){
+            <?php if(isset($_SESSION['dni'])){
                 echo '<li class="nav-item"><a href="logout.php" class="btn btn-danger">Logout</a></li>';
                 }?>
         </ul>
@@ -53,26 +53,26 @@
                     <input type="text" class="form-control mb-3" id="NameSignup" name="name" onkeyup="live_checkName()" placeholder="<?php echo "$row[1]";?>">
                     <p class="wrong_input" id="wrong_name">Solo caracteres alfabeticos</p>
                     <label for="ApellidosSignup" class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" onkeyup="live_checkSurname()" placeholder="<?php echo $row[2];?>">
+                    <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" onkeyup="live_checkSurname()" placeholder="<?php echo "$row[2]";?>">
                     <p class="wrong_input" id="wrong_surname">Solo caracteres alfabeticos</p>
                     <label for="UsernameSignup" class="form-label">Usuario</label>
-                    <input class="form-control mb-3" id="UsernameSignup" name="username" placeholder=<?php echo "$row[3]";?>>
+                    <input class="form-control mb-3" id="UsernameSignup" name="username" placeholder="<?php echo "$row[3]";?>">
                     <label for="InputPasswordSignup" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password" placeholder=<?php echo "$row[4]";?>>
+                    <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password" placeholder="<?php echo "$row[4]";?>">
                     <label for="InputEmailSignup" class="form-label">Direccion de correo</label>
-                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" placeholder=<?php echo "$row[5]";?> onkeyup="live_checkEmail()">
+                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" onkeyup="live_checkEmail()" placeholder="<?php echo "$row[5]";?>">
                     <p class="wrong_input" id="wrong_email">El formato del email no es correcto</p>
                     <label for="PhoneSignup" class="form-label">Telefono (9 dígitos) </label>
-                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder=<?php echo "$row[6]";?>>
+                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder="<?php echo "$row[6]";?>">
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
                     <!-- <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()"> -->
-                    <input type="text" class="form-control mb-3" id="DOBSignup" placeholder=<?php echo "$row[7]";?> name="dob" onkeyup="live_checkDate()"> 
+                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()" placeholder="<?php echo "$row[7]";?>"> 
                     <!--<input class="form-control mb-3" id="DOBSignup" name="dob" placeholder=<?php echo "$row[7]";?> onkeyup="live_checkDate()"> -->
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
-                    <label for="DNISignup" class="form-label">DNI (12345678-Z)</label>
-                    <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder=<?php echo "$row[0]";?> onkeyup="live_checkDNI()">
-                    <p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>
+                    <label id="DNI" for="DNISignup" class="form-label">DNI</label>
+                    <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder="<?php echo "$row[0]";?>" disabled>
+                    <!--<p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>-->
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Modificar</button>
             </form>
             <br>
