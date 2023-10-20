@@ -50,24 +50,24 @@
             <h1>Modificar datos</h1>
             <form name="signUp" id="signUpForm">
                     <label for="NameSignup" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control mb-3" id="NameSignup" name="name" onkeyup="live_checkName()" placeholder=<?php echo "$row[1]";?>>
+                    <input type="text" class="form-control mb-3" id="NameSignup" name="name" onkeyup="live_checkName()" placeholder="<?php echo "$row[1]";?>">
                     <p class="wrong_input" id="wrong_name">Solo caracteres alfabeticos</p>
                     <label for="ApellidosSignup" class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" onkeyup="live_checkSurname()" placeholder=<?php echo "$row[2]";?>>
+                    <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" onkeyup="live_checkSurname()" placeholder="<?php echo "$row[2]";?>">
                     <p class="wrong_input" id="wrong_surname">Solo caracteres alfabeticos</p>
                     <label for="UsernameSignup" class="form-label">Usuario</label>
-                    <input class="form-control mb-3" id="UsernameSignup" name="username" placeholder=<?php echo "$row[3]";?>>
+                    <input class="form-control mb-3" id="UsernameSignup" name="username" placeholder="<?php echo "$row[3]";?>">
                     <label for="InputPasswordSignup" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password" placeholder=<?php echo "$row[4]";?>>
+                    <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password" placeholder="<?php echo "$row[4]";?>">
                     <label for="InputEmailSignup" class="form-label">Direccion de correo</label>
-                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" onkeyup="live_checkEmail()" placeholder=<?php echo "$row[5]";?> >
+                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" onkeyup="live_checkEmail()" placeholder="<?php echo "$row[5]";?>">
                     <p class="wrong_input" id="wrong_email">El formato del email no es correcto</p>
                     <label for="PhoneSignup" class="form-label">Telefono (9 dígitos) </label>
-                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder=<?php echo "$row[6]";?>>
+                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder="<?php echo "$row[6]";?>">
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
                     <!-- <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()"> -->
-                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()" placeholder=<?php echo "$row[7]";?>> 
+                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()" placeholder="<?php echo "$row[7]";?>"> 
                     <!--<input class="form-control mb-3" id="DOBSignup" name="dob" placeholder=<?php echo "$row[7]";?> onkeyup="live_checkDate()"> -->
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
                     <label id="DNI" for="DNISignup" class="form-label">DNI</label>
