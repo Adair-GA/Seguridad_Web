@@ -48,7 +48,7 @@
             </h1>
             <form name="signUp" id="signUpForm">
                     <label for="EntryName" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control mb-3" id="EntryName" name="name" placeholder=<?php echo $row['nombre'];?>>
+                    <input type="text" class="form-control mb-3" id="EntryName" name="name" placeholder="<?php echo $row['nombre'];?>">
 
                     <label for="EntryDOB" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
                     <!-- <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()"> -->
