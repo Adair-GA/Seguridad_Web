@@ -1,16 +1,16 @@
 function checkName(){
     var name= document.signUp.name.value.trim();
 
-    if (name == ""){
+    if (name==""){
         return false;
     }
 
     for (let i = 0; i < name.length; i++){
-        var ascii = name.charCodeAt(i);
-        if ((ascii < 65 || ascii > 122) && (ascii != 32)){
+        var ascii = name.charCodeAt(i); //UTF-16
+        if ((ascii < 65 || ascii > 122) && (ascii!=32) && (ascii!=209 && ascii!=241) && (ascii!=225 && ascii!=193) && (ascii!=201 && ascii!=233) && (ascii!=205 && ascii!=237) && (ascii!=211 && ascii!=243) && (ascii!=218 && ascii!=250)){
+            //209: Ñ, 241: ñ, y vocales con tílde
             return false;
         }
-        
     }
     return true;
 }
@@ -18,13 +18,14 @@ function checkName(){
 function checkSurname(){
     var surname= document.signUp.surname.value.trim();
 
-    if (surname == ""){
+    if (surname==""){
         return false;
     }
 
     for (let i = 0; i < surname.length; i++){
-        var ascii = surname.charCodeAt(i);
-        if ((ascii < 65 || ascii > 122) && (ascii != 32)){
+        var ascii = surname.charCodeAt(i); //UTF-16
+        if ((ascii < 65 || ascii > 122) && (ascii!=32) && (ascii!=209 && ascii!=241) && (ascii!=225 && ascii!=193) && (ascii!=201 && ascii!=233) && (ascii!=205 && ascii!=237) && (ascii!=211 && ascii!=243) && (ascii!=218 && ascii!=250)){
+            //209: Ñ, 241: ñ, y vocales con tílde
             return false;
         }
         
@@ -32,7 +33,7 @@ function checkSurname(){
     return true;
 }
 
-function checkDNI(){    
+/*function checkDNI(){    
     var letras = ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E','T'];
     var dni=document.signUp.dni.value.trim();
     try { //Obtenemos la letra
@@ -48,7 +49,7 @@ function checkDNI(){
         return false;
     }
     return true;
-}
+}*/
 
 function checkTel(){
     var tel= document.signUp.phone.value.trim();
@@ -67,13 +68,13 @@ function checkTel(){
      return true;
 }
 
-function checkEmail(){
+function checkEmail(){    
     var email= document.signUp.email.value.trim();
-    var reg = RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
     if (email == ""){
         return false;
     }
+    var reg = RegExp('^[\\w-\\.\\ñ\\Ñ]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
     if (!reg.test(email)){
         return false;
@@ -83,6 +84,10 @@ function checkEmail(){
 
 function checkDate(){
     var date= document.signUp.DOBSignup.value.trim();
+
+    if (date == ""){
+        return false;
+    }
     /*Validamos la fecha con la siguiente expresión Regex, que indica
     que será un formato de:
         4 números del 0 al 9 cada uno
@@ -176,14 +181,14 @@ function fill_fields(sql){
     catch(err){
         console.log(err);
     }
-    try{
+    /*try{
         if (checkDNI()){
             sql = sql.concat(" dni = '", document.signUp.dni.value.trim()).concat("',");
         }
     }
     catch(err){
         console.log(err);
-    }
+    }*/
     try{
         if (checkTel()){
             console.debug("telefono");
