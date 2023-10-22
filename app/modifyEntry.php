@@ -51,7 +51,6 @@
                     <input type="text" class="form-control mb-3" id="EntryName" name="name" placeholder="<?php echo $row['nombre'];?>">
 
                     <label for="EntryDOB" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
-                    <!-- <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()"> -->
                     <input type="text" class="form-control mb-3" id="DOBSignup" placeholder=<?php echo $row['fecha_nacimiento'];?> name="dob" onkeyup="live_checkDate()"> 
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
 

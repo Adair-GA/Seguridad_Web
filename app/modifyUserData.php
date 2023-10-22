@@ -66,13 +66,10 @@
                     <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder="<?php echo "$row[6]";?>">
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
-                    <!-- <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()"> -->
                     <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()" placeholder="<?php echo "$row[7]";?>"> 
-                    <!--<input class="form-control mb-3" id="DOBSignup" name="dob" placeholder=<?php echo "$row[7]";?> onkeyup="live_checkDate()"> -->
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
                     <label id="DNI" for="DNISignup" class="form-label">DNI</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder="<?php echo "$row[0]";?>" disabled>
-                    <!--<p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>-->
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Modificar</button>
             </form>
             <br>

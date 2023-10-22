@@ -26,23 +26,27 @@ function checkSurname(){
 }
 
 function checkDNI(){
-    //Falta comprobar que el formato del DNI introducido sea correcto
     
     var letras = ['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E','T'];
     var dni=document.signUp.dni.value.trim();
-    try {
-        var letraInput=dni[9].toString().toUpperCase();
-    } catch (error) {
-        return false;
-    }
-    var dniSinLetra=dni.slice(0,8);
 
-    dniSinLetra=dniSinLetra%23;
-    
-    if (letras[dniSinLetra]!=letraInput){
+    if (dni.length!=10){
         return false;
+    }else{
+        try {
+            var letraInput=dni[9].toString().toUpperCase();
+        } catch (error) {
+            return false;
+        }
+        var dniSinLetra=dni.slice(0,8);
+    
+        dniSinLetra=dniSinLetra%23;
+        
+        if (letras[dniSinLetra]!=letraInput){
+            return false;
+        }
+        return true;
     }
-    return true;
 }
 
 function checkTel(){
@@ -60,6 +64,8 @@ function checkTel(){
 
 function checkEmail(){
     var email= document.signUp.email.value.trim();
+    
+    // Regex que permite caracteres (incluyendo ñ y .), @, servicio (gmail, outlook...) y extensión de entre 2 y 4 caracteres (.com, .es, .eus...)
     var reg = RegExp('^[\\w-\\.\\ñ\\Ñ]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
     if (!reg.test(email)){
@@ -93,14 +99,15 @@ function checkDate(){
         let day=parseInt(date.slice(8,10));
 
         if (month=="01" || month== "03" || month=="05" || month=="07" || month=="08" || month=="10" || month=="12"){
+        //Meses con 31 días    
             if (day>0 && day<32){
                 return true;
             }else{
                 return false;
             }
-        }else if (month=="02"){
+        }else if (month=="02"){ // Caso especial Febrero
             let limit = 0;
-            if (year%400==0 && year%100==0){
+            if (year%400==0 && year%100==0){ // Año bisiesto
                 limit=30;
             }else{
                 limit=29;
@@ -112,6 +119,7 @@ function checkDate(){
                 return false;
             }
         }else{
+        // Meses con 30 días
             if (day>0 && day<31){
                 return true;
             }else{
@@ -122,6 +130,7 @@ function checkDate(){
     
 }
 
+// Función que se ejecuta al pulsar en Registrar.
 async function register(event){
     event.preventDefault();
     //if all the checks are true, submit the form via POST fetch to /api/signup_register.php
@@ -148,6 +157,8 @@ async function register(event){
     }
 }
 
+// Funciones cuyo nombre empizan con "live_" sirven para checkear la correción de los datos introducidos en el momento y no cuando se pulse el botón.
+// Si hay algo mal, se muestra un mensaje.
 function live_checkName(){
     if (checkName()){
         document.getElementById("wrong_name").style.display = "none";
@@ -196,6 +207,7 @@ function live_checkDate(){
     }
 }
 
+// Función que se ejecuta al pulsar en Login.
 async function login(event){
     event.preventDefault();
     //if all the checks are true, submit the form via POST fetch to /api/login.php
@@ -217,6 +229,7 @@ async function login(event){
     }
 }
 
+// EventListener de los dos botones disponibles en la página, para evitar el uso de onClicked en HTML.
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("SignUpButton").addEventListener("click", register);
     document.getElementById("LogInButton").addEventListener("click", login);

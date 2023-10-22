@@ -84,14 +84,15 @@ function checkDate(){
         let day=parseInt(date.slice(8,10));
 
         if (month=="01" || month== "03" || month=="05" || month=="07" || month=="08" || month=="10" || month=="12"){
-            if (day>0 && day<32){
+        //Meses con 31 días
+            if (day>0 && day<32){ // Caso especial Febrero
                 return true;
             }else{
                 return false;
             }
         }else if (month=="02"){
             let limit = 0;
-            if (year%400==0 && year%100==0){
+            if (year%400==0 && year%100==0){ // Año bisiesto
                 limit=30;
             }else{
                 limit=29;
@@ -103,6 +104,7 @@ function checkDate(){
                 return false;
             }
         }else{
+        // Meses con 30 días
             if (day>0 && day<31){
                 return true;
             }else{
@@ -113,6 +115,7 @@ function checkDate(){
     
 }
 
+// Checkear la correción de los datos introducidos en el momento y no cuando se pulse el botón.
 function live_checkDate(){
     if (checkDate()){
         document.getElementById("wrong_date").style.display = "none";
@@ -121,7 +124,7 @@ function live_checkDate(){
     }
 }
 
-
+// EventListener del botón disponible en la página, para evitar el uso de onClicked en HTML.
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("sendButton").addEventListener("click", update);
 })

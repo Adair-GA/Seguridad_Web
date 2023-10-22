@@ -48,9 +48,7 @@
                     <input type="text" class="form-control mb-3" id="EntryName" name="name">
 
                     <label for="EntrDOB" class="form-label">Fecha de nacimiento</label>
-                    <!-- <input type="date" class="form-control mb-3" id="DOBEntry" name="dob" onkeyup="live_checkDate()"> -->
                     <input type="text" class="form-control mb-3" id="DOBSignup" placeholder="aaaa-mm-dd" name="dob" onkeyup="live_checkDate()"> 
-                    <!-- <input class="form-control mb-3" id="DOBEntry" placeholder="aaaa-mm-dd" name="dob" onkeyup="live_checkDate()"> -->
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
 
                     <label for="signosolar" class="form-label">Elige el signo solar:</label>

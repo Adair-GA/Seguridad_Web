@@ -67,8 +67,6 @@
                     <input type="tel" class="form-control mb-3" placeholder="9 Digitos" id="PhoneSignup" name="phone" onkeyup="live_checkTel()">
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento:</label>
-                    <!-- <input class="form-control mb-3" id="DOBSignup" placeholder="aaaa-mm-dd" name="dob" onkeyup="live_checkDate()"> 
-                    <input type="date" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()">  -->
                     <input type="text" class="form-control mb-3" id="DOBSignup" placeholder="aaaa-mm-dd" name="dob" onkeyup="live_checkDate()"> 
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
                     <label for="DNISignup" class="form-label">DNI (no podrá modificarse)</label>
