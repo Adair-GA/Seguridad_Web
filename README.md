@@ -52,6 +52,11 @@ $ docker-compose up -d #-d devuelve el prompt de la terminal.
 ```
 Accedemos a http://localhost:81/ en el navegador.
 
+# Errores posibles y enlace a solución:
+"port is already allocated": https://stackoverflow.com/questions/46176584/docker-bind-for-0-0-0-04000-failed-port-is-already-allocated
+
+"Error checking context": https://stackoverflow.com/questions/41286028/docker-build-error-checking-context-cant-stat-c-users-username-appdata
+
 <!--
 ----------------------------------------------------------------------------------
 # Instalación Docker
