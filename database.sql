@@ -48,6 +48,7 @@ CREATE TABLE `usuarios` (
   `apellidos` tinytext NOT NULL,
   `usuario` tinytext NOT NULL,
   `contraseña` tinytext NOT NULL,
+  `sal` tinytext NOT NULL,
   `email` tinytext NOT NULL,
   `telefono` tinytext NOT NULL,
   `fecha_nacimiento` date NOT NULL
@@ -57,8 +58,8 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `usuario`, `contraseña`, `email`, `telefono`, `fecha_nacimiento`) VALUES
-('10000000-A', 'Test', 'Test', 'user', 'user', 'test@test.com', '123123123', '1970-01-01');
+INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `usuario`, `contraseña`, `sal`, `email`, `telefono`, `fecha_nacimiento`) VALUES
+('10000000-A', 'Test', 'Test', 'user', 'user', '000000', 'test@test.com', '123123123', '1970-01-01');
 
 --
 -- Índices para tablas volcadas
