@@ -1,4 +1,5 @@
 <?php session_start();
+$_SESSION['token'] = bin2hex(random_bytes(24));
 //Se tiene que poder acceder sin iniciar sesión, sobra lo siguiente:
 /*if(!isset($_SESSION['email'])){
     header("Location: /login.php");
@@ -89,6 +90,7 @@
                         <option value=Si>Si</option>
                     </select>
 
+                    <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">
                     <button type="submit" id="sendButton" class="btn btn-primary">Añadir</button>
             </form>
             <br>

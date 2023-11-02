@@ -18,6 +18,7 @@ if ($row[0]) {
     $_SESSION['email'] = $row[0];
     $_SESSION['usuario'] = $row[1];
     $_SESSION['dni'] = $row[2];
+    $_SESSION['token'] = bin2hex(random_bytes(24));
     echo "Login correcto";
 } else {
     echo "Login incorrecto";
