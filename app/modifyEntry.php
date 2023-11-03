@@ -1,4 +1,5 @@
-<?php session_start();?> <!--Permite empezar o reanudar una sesión (login) -->
+<?php session_start();
+$_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar una sesión (login) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,6 +93,7 @@
                         <option value=Si <?php if($row['mercurio_retrogrado'] == 1) echo 'selected'; ?>>Si</option>
                     </select>
 
+                    <input type="hidden" id="InputToken" name="token" value="<?php echo $_SESSION['token']?>">
                     <button type="submit" id="sendButton" class="btn btn-primary">Modificar</button>
             </form>
             <br>

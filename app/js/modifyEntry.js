@@ -9,7 +9,8 @@ async function update(event){
     }
 
     id=getId();
-    sql = sql.slice(0,-1).concat(" WHERE id = ", id).concat(";") // Con slice quitamos el último carácter, que es una coma
+    sql = sql.slice(0,-1).concat(" WHERE id = ", id).concat(";"); // Con slice quitamos el último carácter, que es una coma
+    sql = sql.concat(document.getElementById('InputToken').value);
     res = await fetch('/api/update_entry.php', {
         method: 'POST',
         body: sql

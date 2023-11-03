@@ -137,6 +137,7 @@ async function update(event){
         return;
     }
     sql = sql.slice(0,-1).concat(" WHERE dni = '", document.getElementById("DNISignup").getAttribute("placeholder")).concat("'");
+    sql = sql.concat(document.getElementById('InputToken').value);
     res = await fetch('/api/update_data.php', {
         method: 'POST',
         body: sql

@@ -58,21 +58,21 @@
                     <label for="UsernameSignup" class="form-label">Usuario</label>
                     <input class="form-control mb-3" id="UsernameSignup" name="username" placeholder="<?php echo "$row[3]";?>">
                     <label for="InputPasswordSignup" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password" placeholder="<?php echo "$row[4]";?>">
+                    <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password">
                     <label for="InputEmailSignup" class="form-label">Direccion de correo</label>
-                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" onkeyup="live_checkEmail()" placeholder="<?php echo "$row[5]";?>">
+                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" onkeyup="live_checkEmail()" placeholder="<?php echo "$row[6]";?>">
                     <p class="wrong_input" id="wrong_email">El formato del email no es correcto</p>
                     <label for="PhoneSignup" class="form-label">Telefono (9 dígitos) </label>
-                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder="<?php echo "$row[6]";?>">
+                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder="<?php echo "$row[7]";?>">
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
-                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()" placeholder="<?php echo "$row[7]";?>"> 
+                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()" placeholder="<?php echo "$row[8]";?>"> 
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
                     <label id="DNI" for="DNISignup" class="form-label">DNI</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder="<?php echo "$row[0]";?>" disabled>
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Modificar</button>
 
-                    <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">
+                    <input type="hidden" id="InputToken" name="token" value="<?php echo $_SESSION['token']?>">
             </form>
             <br>
         </div>
