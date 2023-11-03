@@ -71,6 +71,8 @@
                     <label id="DNI" for="DNISignup" class="form-label">DNI</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder="<?php echo "$row[0]";?>" disabled>
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Modificar</button>
+
+                    <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">
             </form>
             <br>
         </div>

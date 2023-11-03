@@ -214,6 +214,7 @@ async function login(event){
     fd = new FormData()
     fd.append('email', document.getElementById('InputEmail').value)
     fd.append('password', document.getElementById('InputPassword').value)
+    fd.append('token', document.getElementById('InputToken').value)
     res = await fetch('/api/login.php', {
         method: 'POST',
         body: fd

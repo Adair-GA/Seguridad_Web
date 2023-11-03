@@ -1,4 +1,6 @@
-<?php session_start();?> <!--Permite empezar o reanudar una sesión (login) -->
+<?php session_start();
+$_SESSION['token'] = bin2hex(random_bytes(24));
+?> <!--Permite empezar o reanudar una sesión (login) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +46,8 @@
                 <label for="InputPassword" class="form-label">Password</label>
                 <input type="password" class="form-control mb-3" id="InputPassword">
                 <button type="submit" class="btn btn-primary" id="LogInButton">Login</button>
+
+                <input type="hidden" id="InputToken" name="token" value="<?php echo $_SESSION['token']?>">
             </form>
         </div>
         <hr>
@@ -73,6 +77,8 @@
                     <input type="text" class="form-control mb-3" id="DNISignup" placeholder="12345678-Z" name="dni" onkeyup="live_checkDNI()">
                     <p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Registro</button>
+            
+                    <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">
             </form>
             <br>
         </div>
