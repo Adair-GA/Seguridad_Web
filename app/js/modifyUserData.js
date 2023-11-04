@@ -132,6 +132,7 @@ async function update(event){
     //if all the checks are true, submit the form via POST fetch to /api/signup_register.php
     sql = "UPDATE `usuarios` SET ";
     sql = fill_fields(sql);
+    alert(sql);
     if (sql == "UPDATE `usuarios` SET "){
         alert("No se ha modificado ningún campo");
         return;
@@ -207,13 +208,25 @@ function fill_fields(sql){
     try{
         contrasena = document.getElementById("InputPasswordSignup").value.trim();
         if (contrasena != ""){
-            sql = sql.concat(" contraseña = '", contrasena).concat("',");
+        hashContrasena(contrasena).then(hashedPassword => {
+        alert(hashedPassword);
+        sql = sql.concat(" contraseña = '", hashedPassword).concat("',");
+        });
         }
     }
     catch(err){
         console.log(err);
     }
     return sql;
+}
+
+async function hashContrasena(pass){
+    let res = await fetch('/api/hash_input.php', {
+        method: 'POST',
+        body: pass
+    });
+    let hashedPassword = await res.text();
+    return hashedPassword;
 }
 
 // Funciones cuyo nombre empizan con "live_" sirven para checkear la correción de los datos introducidos en el momento y no cuando se pulse el botón.
