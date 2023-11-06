@@ -2,7 +2,7 @@ function checkName(){
     var name= document.signUp.name.value.trim();
 
     if (name==""){
-        return false;
+        return true;
     }
 
     for (let i = 0; i < name.length; i++){
@@ -19,7 +19,7 @@ function checkSurname(){
     var surname= document.signUp.surname.value.trim();
 
     if (surname==""){
-        return false;
+        return true;
     }
 
     for (let i = 0; i < surname.length; i++){
@@ -37,7 +37,7 @@ function checkTel(){
     var tel= document.signUp.phone.value.trim();
 
     if (tel == ""){
-        return false;
+        return true;
     }
 
     for (let i = 0; i < tel.length; i++) {
@@ -54,7 +54,7 @@ function checkEmail(){
     var email= document.signUp.email.value.trim();
 
     if (email == ""){
-        return false;
+        return true;
     }
     
     // Regex que permite caracteres (incluyendo ñ y .), @, servicio (gmail, outlook...) y extensión de entre 2 y 4 caracteres (.com, .es, .eus...)
@@ -70,7 +70,7 @@ function checkDate(){
     var date= document.signUp.DOBSignup.value.trim();
 
     if (date == ""){
-        return false;
+        return true;
     }
     /*Validamos la fecha con la siguiente expresión Regex, que indica
     que será un formato de:
@@ -130,103 +130,21 @@ function checkDate(){
 async function update(event){
     event.preventDefault();
     //if all the checks are true, submit the form via POST fetch to /api/signup_register.php
-    sql = "UPDATE `usuarios` SET ";
-    sql = fill_fields(sql);
-    alert(sql);
-    if (sql == "UPDATE `usuarios` SET "){
-        alert("No se ha modificado ningún campo");
-        return;
-    }
-    sql = sql.slice(0,-1).concat(" WHERE dni = '", document.getElementById("DNISignup").getAttribute("placeholder")).concat("'");
-    sql = sql.concat(document.getElementById('InputToken').value);
-    res = await fetch('/api/update_data.php', {
-        method: 'POST',
-        body: sql
-    })
-    res = await res.text();
-    if (res != 'success') {
-        alert(res);
-    }else{
-        alert("Actualización realizada con éxito");
-        window.location.reload();
-    }
-}
-
-// Función para crear la sentencia SQL de actualización a medida
-function fill_fields(sql){
-    try{
-        if (checkName()){
-            sql = sql.concat(" nombre = '", document.signUp.name.value.trim()).concat("',");
+    if (checkName() && checkSurname() && checkDate() && checkEmail() && checkTel()){
+        fd = new FormData(document.getElementById('signUpForm'));
+        fd.append('dniPlace', document.getElementById("DNISignup").getAttribute("placeholder"))
+        res = await fetch('/api/update_data.php', {
+            method: 'POST',
+            body: fd
+        })
+        res = await res.text();
+        if (res != 'success') {
+            alert(res);
+        }else{
+            alert("Actualización realizada con éxito");
+            window.location.reload();
         }
     }
-    catch(err){
-        console.log(err);
-    }
-    try{
-        if (checkSurname()){
-            sql = sql.concat(" apellidos = '", document.signUp.surname.value.trim()).concat("',");
-
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-    try{
-        if (checkTel()){
-            console.debug("telefono");
-            sql = sql.concat(" telefono = '", document.signUp.phone.value.trim()).concat("',");
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-    try{
-        if (checkEmail()){
-            sql = sql.concat(" email = '", document.signUp.email.value.trim()).concat("',");
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-    try{
-        if (checkDate()){
-            sql = sql.concat(" fecha_nacimiento = '", document.signUp.DOBSignup.value.trim()).concat("',");
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-    try{
-        usuario = document.getElementById("UsernameSignup").value.trim();
-        if (usuario != ""){
-            sql = sql.concat(" usuario = '", usuario).concat("',");
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-    try{
-        contrasena = document.getElementById("InputPasswordSignup").value.trim();
-        if (contrasena != ""){
-        hashContrasena(contrasena).then(hashedPassword => {
-        alert(hashedPassword);
-        sql = sql.concat(" contraseña = '", hashedPassword).concat("',");
-        });
-        }
-    }
-    catch(err){
-        console.log(err);
-    }
-    return sql;
-}
-
-async function hashContrasena(pass){
-    let res = await fetch('/api/hash_input.php', {
-        method: 'POST',
-        body: pass
-    });
-    let hashedPassword = await res.text();
-    return hashedPassword;
 }
 
 // Funciones cuyo nombre empizan con "live_" sirven para checkear la correción de los datos introducidos en el momento y no cuando se pulse el botón.
