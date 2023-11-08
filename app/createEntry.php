@@ -11,6 +11,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' 'unsafe-inline' cdn.jsdelivr.net *.cdn.jsdelivr.net">
     <title>Nueva entrada - Euskoroscopo</title> <!--Título de la pestaña--->
     
     <!--Importar estilo CSS-->

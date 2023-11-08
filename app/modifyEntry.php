@@ -5,6 +5,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' 'unsafe-inline' cdn.jsdelivr.net *.cdn.jsdelivr.net">
     <title>Modificar entrada - Euskoroscopo</title> <!--Título de la pestaña--->  
 
     <!--Importar estilo CSS, antes se empleaba DataTable de JQuery, actualmente una tabla propia-->
