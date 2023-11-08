@@ -1,1 +1,14 @@
 /*Aquí irá el css propio cuando modifiquemos el html*/
+body{
+    background-image: url("../images/background.webp");
+    background-size: cover;
+    color: white;
+}
+
+.fs-5{
+    color:white;
+}
+
+.nav-link{
+    color:white;
+}

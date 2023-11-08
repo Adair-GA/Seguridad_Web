@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' cdn.jsdelivr.net *.cdn.jsdelivr.net">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' cdn.jsdelivr.net *.cdn.jsdelivr.net">
     <title>Euskor&oacute;scopo</title> <!--Título de la pestaña--->    
 
     <!--Importar estilo CSS, antes se empleaba DataTable de JQuery, actualmente una tabla propia-->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" /> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="css/tabla_inicio.css">
+    <link rel="stylesheet" href="css/index.css">
 
     <!--Importar código JavaScript-->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -22,7 +23,7 @@
     <!--También se implementa CSS propio para un propósitos muy determinados y específicos-->
 </head>
 
-<body style="background-image: url('images/background.webp'); background-size: cover; color: white;">
+<body>
     <div class="container-sm">
         
         <!-- Menú de navegación superior -->
@@ -39,7 +40,7 @@
             <ul class="nav nav-pills">
                 <!-- Si hay una sesión iniciada, se mostrará su menú correspondiente -->
                 <!-- Si no, se mostrarán las opciones que no necesitan identificación -->
-                <li class="nav-item"><a href="createEntry.php" class="nav-link" style="color:white">Crear entrada</a></li>
+                <li class="nav-item"><a href="createEntry.php" class="nav-link">Crear entrada</a></li>
                 <?php
                 if (isset($_SESSION['email'])) {
                     echo '<li class="nav-item"><a href="modifyUserData.php" class="nav-link" style="color:white">Modificar datos</a></li>';
