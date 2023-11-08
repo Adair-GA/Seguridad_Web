@@ -16,8 +16,11 @@ if ($token==$_SESSION['token']){
         $boolRetrogrado = 1;
     }
 
-    $query = "INSERT INTO horoscopos (nombre, fecha_nacimiento, signo_solar, signo_lunar, mercurio_retrogrado) VALUES ('$nombre', '$fecha_nacimiento', '$signosolar', '$signolunar', '$boolRetrogrado')";
-    $result = mysqli_query($conn, $query) or die (mysqli_error($conn));
+    $query = "INSERT INTO horoscopos (nombre, fecha_nacimiento, signo_solar, signo_lunar, mercurio_retrogrado) VALUES (?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
+    mysqli_stmt_bind_param($stmt, "ssssi", $nombre, $fecha_nacimiento, $signosolar, $signolunar, $boolRetrogrado);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     if ($result) { // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
         echo "Horoscopo registrado correctamente";
     } else {

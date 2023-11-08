@@ -3,7 +3,7 @@ session_start();
 include "../dbconn.php";
 
 //password_hash() ?
-function getSalt($n) {
+function getSalt(int $n) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $randomString = '';
  
@@ -33,10 +33,16 @@ if ($token==$_SESSION['token']){
     $fecha_nacimiento = $_REQUEST['dob'];
     $dni = $_REQUEST['dni'];
 
-    $query = "SELECT count(nombre) FROM usuarios WHERE usuario='$usuario'";
-    $query2 = "SELECT count(nombre) FROM usuarios WHERE dni='$dni'";
-    $result = mysqli_query($conn, $query) or die (mysqli_error($conn));
-    $result2 = mysqli_query($conn, $query2) or die (mysqli_error($conn));
+    $query = "SELECT count(nombre) FROM usuarios WHERE usuario= ?";
+    $query2 = "SELECT count(nombre) FROM usuarios WHERE dni= ?";
+    $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
+    $stmt2 = mysqli_prepare($conn, $query2) or die (mysqli_error($conn));
+    mysqli_stmt_bind_param($stmt, "s", $usuario);
+    mysqli_stmt_bind_param($stmt2, "s", $dni);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt2);
+    $result = mysqli_stmt_get_result($stmt);
+    $result2 = mysqli_stmt_get_result($stmt2);
     $row = mysqli_fetch_array($result);
     $row2 = mysqli_fetch_array($result2);
     if ($row[0]!=0 and $row2[0]!=0){
@@ -49,8 +55,11 @@ if ($token==$_SESSION['token']){
         echo "DNI repetido, por favor introduzca otro DNI";
     }
     else{
-        $query = "INSERT INTO usuarios (dni, nombre, apellidos, usuario, contraseña, sal, email, telefono, fecha_nacimiento) VALUES ('$dni', '$nombre', '$apellido', '$usuario', '$contrasena', '$salt', '$email', '$telefono', '$fecha_nacimiento')";
-        $result = mysqli_query($conn, $query) or die (mysqli_error($conn));
+        $query = "INSERT INTO usuarios (dni, nombre, apellidos, usuario, contraseña, sal, email, telefono, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
+        mysqli_stmt_bind_param($stmt, "sssssssss", $dni, $nombre, $apellido, $usuario, $contrasena, $salt, $email, $telefono, $fecha_nacimiento);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
         if ($result) { // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
             echo "Usuario registrado correctamente";
         } else {

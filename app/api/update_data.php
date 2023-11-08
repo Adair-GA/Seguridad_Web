@@ -5,8 +5,11 @@
     function getSalt() {
         include '../dbconn.php';
         $userForSalt = $_SESSION['usuario'];
-        $query = "SELECT sal FROM usuarios WHERE usuario = '$userForSalt'";
-        $result = mysqli_query($conn, $query) or die (mysqli_error($conn));
+        $query = "SELECT sal FROM usuarios WHERE usuario = ?";
+        $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
+        mysqli_stmt_bind_param($stmt, "s", $userForSalt);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
         $row = mysqli_fetch_array($result);
      
         return $row[0];
@@ -25,59 +28,81 @@
         $dni = $_REQUEST['dniPlace'];
 
         $query = "UPDATE `usuarios` SET";
+        $types = "";
+        $params = array();
+
         if ($nombre!=""){
-            $add=" nombre = '" . $nombre;
+            $add=" nombre = ?";
             $query.=$add;
-            $query.="',";
+            $query.=",";
+            $types.="s";
+            array_push($params, $nombre);
         }
         if ($apellido!=""){
-            $add=" apellidos = '" . $apellido;
+            $add=" apellidos = ?";
             $query.=$add;
-            $query.="',";
+            $query.=",";
+            $types.="s";
+            array_push($params, $apellido);
         }
         if ($telefono!=""){
-            $add=" telefono = '" . $telefono;
+            $add=" telefono = ?";
             $query.=$add;
-            $query.="',";
+            $query.=",";
+            $types.="s";
+            array_push($params, $telefono);
         }
         if ($email!=""){
-            $add=" email = '" . $email;
+            $add=" email = ?";
             $query.=$add;
-            $query.="',";
+            $query.=",";
+            $types.="s";
+            array_push($params, $email);
         }
         if ($fecha_nacimiento!=""){
-            $add=" fecha_nacimiento = '" . $fecha_nacimiento;
+            $add=" fecha_nacimiento = ?";
             $query.=$add;
-            $query.="',";
+            $query.=",";
+            $types.="s";
+            array_push($params, $fecha_nacimiento);
         }
         if ($usuario!=""){
-            $add=" usuario = '" . $usuario;
+            $add=" usuario = ?";
             $query.=$add;
-            $query.="',";
+            $query.=",";
+            $types.="s";
+            array_push($params, $usuario);
         }
         if ($contrasena!=""){
             $salt = getSalt();
             $contrasena .= $salt;
             $contrasena = hash('sha512', $contrasena);
-            
-            $add=" contraseña = '" . $contrasena;
+
+            $add=" contraseña = ?";
             $query.=$add;
-            $query.="',";
+            $query.=",";
+            $types.="s";
+            array_push($params, $contrasena);
         }
 
         if ($query == "UPDATE `usuarios` SET "){
             echo "No se ha modificado ningún campo";
-        }else{
+        } else {
             $query = substr($query,0,-1);  
-            $query.=" WHERE dni ='";
-            $query.=$dni;
-            $query.="';";
-            $result = mysqli_query($conn, $query) or die("Error in Selecting " . mysqli_error($conn));
-        if($result){ // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
-            echo "success";
-        }else{
-            echo "fail";
-        }
+            $query.=" WHERE dni = ?";
+            $types.="s";
+            array_push($params, $dni);
+            $query.=";";
+
+            $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
+            mysqli_stmt_bind_param($stmt, $types, ...$params);
+            $result = mysqli_stmt_execute($stmt);
+
+            if($result){ // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
+                echo "success";
+            } else {
+                echo "fail";
+            }
         }
     }
 ?>
