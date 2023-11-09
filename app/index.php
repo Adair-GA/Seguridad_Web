@@ -10,7 +10,6 @@
     <!--Importar estilo CSS, antes se empleaba DataTable de JQuery, actualmente una tabla propia-->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" /> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/tabla_inicio.css">
     <link rel="stylesheet" href="css/index.css">
 
     <!--Importar código JavaScript-->
@@ -29,7 +28,7 @@
         <!-- Menú de navegación superior -->
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center me-md-auto link-body-emphasis text-decoration-none">
-                <span class="fs-5" style="color:white">Euskor&oacute;scopo
+                <span class="fs-5">Euskor&oacute;scopo
                     <!-- Si hay una sesión iniciada, se mostrará el nombre de usuario -->
                     <?php 
                         if(isset($_SESSION['email'])){ //<!-- isset(): determina si una variables está definida y no es null -->
