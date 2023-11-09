@@ -1,4 +1,5 @@
-<?php session_start();?> <!--Permite empezar o reanudar una sesión (login) -->
+<?php session_start();
+$_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar una sesión (login) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,6 +85,7 @@
                 <table id="tablaHoroscopos" class="display">
                     <thead>
                         <tr>
+                        <input type="hidden" id="InputToken" name="token" value="<?php echo $_SESSION['token']?>">
                             <th>Nombre</th>
                             <th>Signo solar</th>
                             <th>Editar</th>
@@ -102,7 +104,7 @@
                                 echo "<td>$row[nombre]</td>";
                                 echo "<td>$row[signo_solar]</td>";
                                 // Al clickar editar, pasamos el id del elemento a editar con el fin de poder modificar la DB (id es la clave de la relación)
-                                echo "<td><button class='btn btn-danger' onclick='editEntry($row[id])'>Editar</button> <button class='btn btn-danger' onclick=\"deleteEntry($row[id],'$row[nombre]','$row[signo_solar]')\">Eliminar</button></td>";
+                                echo "<td><button class='btn btn-danger' data-type='edit' data-id='$row[id]'>Editar</button> <button class='btn btn-danger' data-type='delete' data-id='$row[id]' data-name='$row[nombre]' data-signo='$row[signo_solar]'>Eliminar</button></td>";
                                 echo "</tr>";
                             }
                         }

@@ -1,6 +1,6 @@
 function editEntry(id){
     // Nos llevará a modifyEntry.php con el parámetro id en el link (inseguro)
-    window.location.href = '/modifyEntry.php?id=' + id; 
+    window.location.href = '/modifyEntry.php?id=' + id;
 }
 
 async function deleteEntry(id,name,signo){
@@ -10,6 +10,7 @@ async function deleteEntry(id,name,signo){
     + " Puedes revisar o modificar toda la información del horóscopo cancelando y clickando en el botón 'Editar' de la tabla.");
     if (confirmation){ // Si se confirma, se borra
         sql = "DELETE FROM horoscopos WHERE id=" + id + ";"; 
+        sql = sql.concat(document.getElementById('InputToken').value);
         res = await fetch('/api/update_entry.php', {
             method: 'POST',
             body: sql
@@ -29,3 +30,40 @@ async function deleteEntry(id,name,signo){
     
 
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    let btns = document.querySelectorAll('button');
+    let index = 1;
+    /*for (i of btns) {
+        if (i.getAttribute("data-type")=="edit"){
+            i.addEventListener('click', () => { 
+                alert(i.getAttribute("data-id"))});
+        }else{
+            i.addEventListener('click', deleteEntry2);
+        }
+        index++;
+    }*/
+
+    for (i of btns) {
+        (function(i) {
+            if (i.getAttribute("data-type")=="edit"){
+                i.addEventListener('click', function() {
+                editEntry(i.getAttribute("data-id"));
+                });
+            }else{
+                i.addEventListener('click', function() {
+                    deleteEntry(i.getAttribute("data-id"),i.getAttribute("data-name"),i.getAttribute("data-signo"));
+                    });
+            }
+        })(i);
+      }
+
+    
+})
+
+
+
+/*document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("SignUpButton").addEventListener("click", register);
+    document.getElementById("LogInButton").addEventListener("click", login);
+})*/
