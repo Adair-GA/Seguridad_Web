@@ -1,6 +1,7 @@
 CSP: 
-	index:php > hacer los botones de editar y eliminar con EventListener y paso de param seguros
+	index:php > TERMINADO
 	resto > quitar el 'unsafe-inline' separando los styles y scrips
 	
 SQL injection:
-	modifyEntry.js > quitar la sentencia SQL y hacer en la API como se ha hecho en modifyUserData.js
+	modifyEntry.js > quitar la sentencia SQL y hacer en la API update_entry.php
+	index.js > quitar la sentencia SQL y hacer en la API update_entry.php
