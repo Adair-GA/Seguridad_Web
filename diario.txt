@@ -1,5 +1,6 @@
 CSP: 
-	index:php > TERMINADO
+	index.php > TERMINADO
+	login.php > TERMINADO
 	resto > quitar el 'unsafe-inline' separando los styles y scrips
 	
 SQL injection:
