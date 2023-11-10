@@ -20,13 +20,12 @@ if ($token==$_SESSION['token']){
     $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
     mysqli_stmt_bind_param($stmt, "ssssi", $nombre, $fecha_nacimiento, $signosolar, $signolunar, $boolRetrogrado);
     mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    if ($result) { // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
-        echo "Horoscopo registrado correctamente";
+    if (mysqli_stmt_affected_rows($stmt) > 0) {
+        echo "OK";
     } else {
-        echo "Error al registrar el usuario";
+        http_response_code(400);
+        echo "ERROR";
     }
-
 }else{
     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
     exit;

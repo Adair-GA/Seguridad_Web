@@ -21,13 +21,18 @@ async function sendData(event) {
                 body: formData
             }
         )
-        res = await res.text();
-        alert(res);
-        if (res == "Horoscopo registrado correctamente") {
-            document.getElementById("entryForm").reset();
+        r_text = await res.text();
+        if (res.status == 200){
+            //Si la entrada se ha creado correctamente, redirigir a la página de inicio.
+            alert("Entrada creada correctamente");
+            window.location.href = "/index.php";
+        }
+        else{
+            //Si la entrada no se ha creado correctamente, mostrar mensaje de error.
+            alert("Error al crear la entrada");
         }
     }
-}
+}   
 
 function checkDate(){
     var date= document.entry.DOBSignup.value.trim();
