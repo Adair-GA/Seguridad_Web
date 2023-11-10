@@ -232,6 +232,13 @@ async function login(event){
 
 // EventListener de los dos botones disponibles en la página, para evitar el uso de onClicked en HTML.
 document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("NameSignup").addEventListener("keyup", live_checkName);
+    document.getElementById("ApellidosSignup").addEventListener("keyup", live_checkSurname);
+    document.getElementById("InputEmailSignup").addEventListener("keyup", live_checkEmail);
+    document.getElementById("PhoneSignup").addEventListener("keyup", live_checkTel);
+    document.getElementById("DOBSignup").addEventListener("keyup", live_checkDate);
+    document.getElementById("DNISignup").addEventListener("keyup", live_checkDNI);
+    
     document.getElementById("SignUpButton").addEventListener("click", register);
     document.getElementById("LogInButton").addEventListener("click", login);
 })

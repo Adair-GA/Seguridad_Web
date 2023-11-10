@@ -4,4 +4,8 @@
    opacity: 70%; 
    font-size: small;
 }
+
+.container{
+   max-width: 50%;
+}
  
