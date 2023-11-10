@@ -8,12 +8,12 @@ async function deleteEntry(id,name,signo){
     // Pedimos confirmación del borrado, indicando los datos del elemento a borrar
     let confirmation = confirm("¿Deseas eliminar el horóscopo de "+name+ " con signo solar "+signo.toLowerCase()+"?"
     + " Puedes revisar o modificar toda la información del horóscopo cancelando y clickando en el botón 'Editar' de la tabla.");
-    if (confirmation){ // Si se confirma, se borra
-        sql = "DELETE FROM horoscopos WHERE id=" + id + ";"; 
-        sql = sql.concat(document.getElementById('InputToken').value);
-        res = await fetch('/api/update_entry.php', {
+    if (confirmation){
+        fd = new FormData();
+        fd.append('id', id);
+        res = await fetch('/api/delete_entry.php', {
             method: 'POST',
-            body: sql
+            body: fd
         })
     
         res = await res.text();
