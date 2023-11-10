@@ -42,14 +42,12 @@ $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar
                     // Se utiliza $_GET porque se pasa por el URL desde index.php, index.js (editEntry(id))
                     echo $_GET['id'];
                     include "dbconn.php";
-                    $query = mysqli_query($conn, "SELECT * FROM horoscopos WHERE id = ?")
-                        or die (mysqli_error($conn));
+                    $query = "SELECT * FROM horoscopos WHERE id = ?;";
                     $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
                     mysqli_stmt_bind_param($stmt, "i", $_GET['id']);
-                    mysqli_stmt_execute($stmt);
+                    $stmt->execute();
                     $result = mysqli_stmt_get_result($stmt);
-                    $row = mysqli_fetch_array($query);
-                    
+                    $row = mysqli_fetch_array($result);                    
                 ?>
             </h1>
             <form name="signUp" id="signUpForm">
