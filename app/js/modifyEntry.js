@@ -127,6 +127,8 @@ function live_checkDate(){
 
 // EventListener del botón disponible en la página, para evitar el uso de onClicked en HTML.
 document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("DOBSignup").addEventListener("keyup", live_checkDate);
+    
     document.getElementById("sendButton").addEventListener("click", update);
 })
 

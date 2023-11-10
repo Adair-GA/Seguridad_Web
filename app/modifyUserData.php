@@ -16,12 +16,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' 'unsafe-inline' cdn.jsdelivr.net *.cdn.jsdelivr.net">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' cdn.jsdelivr.net *.cdn.jsdelivr.net">
     <title>Web Login</title> <!--Título de la pestaña--->
 
     <!--Importar estilo CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/format_messages.css" />
+    <link rel="stylesheet" href="css/forms.css" />
 
     <!--Importar código JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -46,28 +46,28 @@
         </a>
         </header>
     </div>
-    <div class="container" style="max-width: 50%;">
+    <div class="container">
         <div class = "container__signup">
             <h1>Modificar datos</h1>
             <form name="signUp" id="signUpForm">
                     <label for="NameSignup" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control mb-3" id="NameSignup" name="name" onkeyup="live_checkName()" placeholder="<?php echo "$row[1]";?>">
+                    <input type="text" class="form-control mb-3" id="NameSignup" name="name" placeholder="<?php echo "$row[1]";?>">
                     <p class="wrong_input" id="wrong_name">Solo caracteres alfabeticos</p>
                     <label for="ApellidosSignup" class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" onkeyup="live_checkSurname()" placeholder="<?php echo "$row[2]";?>">
+                    <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" placeholder="<?php echo "$row[2]";?>">
                     <p class="wrong_input" id="wrong_surname">Solo caracteres alfabeticos</p>
                     <label for="UsernameSignup" class="form-label">Usuario</label>
                     <input class="form-control mb-3" id="UsernameSignup" name="username" placeholder="<?php echo "$row[3]";?>">
                     <label for="InputPasswordSignup" class="form-label">Contraseña</label>
                     <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password">
                     <label for="InputEmailSignup" class="form-label">Direccion de correo</label>
-                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" onkeyup="live_checkEmail()" placeholder="<?php echo "$row[6]";?>">
+                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" placeholder="<?php echo "$row[6]";?>">
                     <p class="wrong_input" id="wrong_email">El formato del email no es correcto</p>
                     <label for="PhoneSignup" class="form-label">Telefono (9 dígitos) </label>
-                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" onkeyup="live_checkTel()" placeholder="<?php echo "$row[7]";?>">
+                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" placeholder="<?php echo "$row[7]";?>">
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
-                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" onkeyup="live_checkDate()" placeholder="<?php echo "$row[8]";?>"> 
+                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" placeholder="<?php echo "$row[8]";?>"> 
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
                     <label id="DNI" for="DNISignup" class="form-label">DNI</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder="<?php echo "$row[0]";?>" disabled>
