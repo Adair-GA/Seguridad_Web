@@ -1,4 +1,6 @@
-<?php session_start();
+<?php 
+ini_set("session.cookie_httponly", True);
+session_start();
 $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar una sesión (login) -->
 <!DOCTYPE html>
 <html lang="en">
