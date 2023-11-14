@@ -24,7 +24,6 @@ if ($token==$_SESSION['token']){
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_array($result);
     if ($row[0]) {
-        session_start();
         $_SESSION['email'] = $row[0];
         $_SESSION['usuario'] = $row[1];
         $_SESSION['dni'] = $row[2];

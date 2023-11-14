@@ -43,7 +43,7 @@ CREATE TABLE `horoscopos` (
 --
 
 CREATE TABLE `usuarios` (
-  `dni` varchar(10) NOT NULL,
+  `dni` tinytext NOT NULL,
   `nombre` tinytext NOT NULL,
   `apellidos` tinytext NOT NULL,
   `usuario` tinytext NOT NULL,
@@ -51,19 +51,8 @@ CREATE TABLE `usuarios` (
   `sal` tinytext NOT NULL,
   `email` tinytext NOT NULL,
   `telefono` tinytext NOT NULL,
-  `fecha_nacimiento` date NOT NULL
+  `fecha_nacimiento` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `usuario`, `contraseña`, `sal`, `email`, `telefono`, `fecha_nacimiento`) VALUES
-('10000000-A', 'Test', 'Test', 'user', 'user', '000000', 'test@test.com', '123123123', '1970-01-01');
-
---
--- Índices para tablas volcadas
---
 
 --
 -- Indices de la tabla `horoscopos`

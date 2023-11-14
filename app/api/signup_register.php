@@ -32,7 +32,7 @@ function decrypt(string $ciphertext){
     $cipher = "aes-128-gcm";
     $key = file_get_contents('../openssl/key.txt');
     $iv = file_get_contents('../openssl/iv.txt');
-    $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv, $tag);
+    $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv);
     //echo $original_plaintext."\n";
 
     return $original_plaintext;
@@ -76,8 +76,8 @@ if ($token==$_SESSION['token']){
     mysqli_stmt_bind_param($stmt, "s", $usuario);
     mysqli_stmt_bind_param($stmt2, "s", $dni);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_execute($stmt2);
     $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_execute($stmt2);
     $result2 = mysqli_stmt_get_result($stmt2);
     $row = mysqli_fetch_array($result);
     $row2 = mysqli_fetch_array($result2);
@@ -102,8 +102,7 @@ if ($token==$_SESSION['token']){
         $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
         mysqli_stmt_bind_param($stmt, "sssssssss", $dni, $nombre, $apellido, $usuario, $contrasena, $salt, $email, $telefono, $fecha_nacimiento);
         mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        if ($result) { // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
+        if (mysqli_stmt_affected_rows($stmt) > 0) { // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
             echo "Usuario registrado correctamente";
         } else {
             echo "Error al registrar el usuario";
