@@ -32,8 +32,12 @@ function decrypt(string $ciphertext){
     $cipher = "aes-128-gcm";
     $key = file_get_contents('../openssl/key.txt');
     $iv = file_get_contents('../openssl/iv.txt');
-    $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv);
+
+    if (in_array($cipher, openssl_get_cipher_methods()))
+    {
+        $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv, $tag);
     //echo $original_plaintext."\n";
+    }
 
     return $original_plaintext;
 }
@@ -68,6 +72,11 @@ if ($token==$_SESSION['token']){
     $telefono = $_REQUEST['phone'];
     $fecha_nacimiento = $_REQUEST['dob'];
     $dni = $_REQUEST['dni'];
+
+    $dni = encrypt($dni);
+    $dni = decrypt($dni);
+    echo $dni;
+    $dni = encrypt($dni);
 
     $query = "SELECT count(nombre) FROM usuarios WHERE usuario= ?";
     $query2 = "SELECT count(nombre) FROM usuarios WHERE dni= ?";

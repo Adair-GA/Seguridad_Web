@@ -2,6 +2,42 @@
     session_start();
     include '../dbconn.php';
     
+    function encrypt(string $plaintext){
+
+        //$key should have been previously generated in a cryptographically safe way, like openssl_random_pseudo_bytes
+        $cipher = "aes-128-gcm";
+        
+        $key = file_get_contents('../openssl/key.txt');
+        $ivlen = file_get_contents('../openssl/ivlen.txt');
+        $iv = file_get_contents('../openssl/iv.txt');
+        // Write the contents back to the file
+    
+        if (in_array($cipher, openssl_get_cipher_methods()))
+        {
+            //$ivlen = openssl_cipher_iv_length($cipher);
+            //$iv = openssl_random_pseudo_bytes($ivlen);
+            //file_put_contents('../ivlen.txt', $ivlen);
+            //file_put_contents('../iv.txt', $iv);
+            $ciphertext = openssl_encrypt($plaintext, $cipher, $key, $options=0, $iv, $tag);
+            //echo $ciphertext."\n";
+            //store $cipher, $iv, and $tag for decryption later
+            
+        }
+    
+        return $ciphertext;
+    }
+    
+    function decrypt(string $ciphertext){
+        
+        $cipher = "aes-128-gcm";
+        $key = file_get_contents('../openssl/key.txt');
+        $iv = file_get_contents('../openssl/iv.txt');
+        $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv);
+        //echo $original_plaintext."\n";
+    
+        return $original_plaintext;
+    }
+
     function getSalt() {
         include '../dbconn.php';
         $userForSalt = $_SESSION['usuario'];
@@ -32,6 +68,7 @@
         $params = array();
 
         if ($nombre!=""){
+            $nombre = encrypt ($nombre);
             $add=" nombre = ?";
             $query.=$add;
             $query.=",";
@@ -39,6 +76,7 @@
             array_push($params, $nombre);
         }
         if ($apellido!=""){
+            $apellido = encrypt ($apellido);
             $add=" apellidos = ?";
             $query.=$add;
             $query.=",";
@@ -46,6 +84,7 @@
             array_push($params, $apellido);
         }
         if ($telefono!=""){
+            $telefono = encrypt ($telefono);
             $add=" telefono = ?";
             $query.=$add;
             $query.=",";
@@ -53,6 +92,7 @@
             array_push($params, $telefono);
         }
         if ($email!=""){
+            $email = encrypt ($email);
             $add=" email = ?";
             $query.=$add;
             $query.=",";
@@ -60,6 +100,7 @@
             array_push($params, $email);
         }
         if ($fecha_nacimiento!=""){
+            $fecha_nacimiento = encrypt ($fecha_nacimiento);
             $add=" fecha_nacimiento = ?";
             $query.=$add;
             $query.=",";
