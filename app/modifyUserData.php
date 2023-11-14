@@ -5,6 +5,19 @@
         exit;
     }
     include "dbconn.php";
+
+    function decrypt(string $ciphertext){
+    
+        $cipher = "aes-256-cbc";
+        $key = file_get_contents('openssl/key.txt');
+        $iv = file_get_contents('openssl/iv.txt');
+        $iv = base64_decode($iv);
+    
+        $output = openssl_decrypt(base64_decode($ciphertext), $cipher, $key, 0, $iv);
+    
+        return $output;
+    }
+
     //Mostraremos los datos actuales en el formulario, por lo tanto hacemos una consulta (query) a la DB.
     $query = mysqli_query($conn, "SELECT * FROM usuarios WHERE dni = '$_SESSION[dni]'")
     or die (mysqli_error($conn));
@@ -51,26 +64,26 @@
             <h1>Modificar datos</h1>
             <form name="signUp" id="signUpForm">
                     <label for="NameSignup" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control mb-3" id="NameSignup" name="name" placeholder="<?php echo "$row[1]";?>">
+                    <input type="text" class="form-control mb-3" id="NameSignup" name="name" placeholder="<?php echo decrypt($row[1]);?>">
                     <p class="wrong_input" id="wrong_name">Solo caracteres alfabeticos</p>
                     <label for="ApellidosSignup" class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" placeholder="<?php echo "$row[2]";?>">
+                    <input type="text" class="form-control mb-3" id="ApellidosSignup" name="surname" placeholder="<?php echo decrypt($row[2]);?>">
                     <p class="wrong_input" id="wrong_surname">Solo caracteres alfabeticos</p>
                     <label for="UsernameSignup" class="form-label">Usuario</label>
                     <input class="form-control mb-3" id="UsernameSignup" name="username" placeholder="<?php echo "$row[3]";?>">
                     <label for="InputPasswordSignup" class="form-label">Contraseña</label>
                     <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password">
                     <label for="InputEmailSignup" class="form-label">Direccion de correo</label>
-                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" placeholder="<?php echo "$row[6]";?>">
+                    <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" placeholder="<?php echo decrypt($row[6]);?>">
                     <p class="wrong_input" id="wrong_email">El formato del email no es correcto</p>
                     <label for="PhoneSignup" class="form-label">Telefono (9 dígitos) </label>
-                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" placeholder="<?php echo "$row[7]";?>">
+                    <input type="tel" class="form-control mb-3" id="PhoneSignup" name="phone" placeholder="<?php echo decrypt($row[7]);?>">
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento (aaaa-mm-dd)</label>
-                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" placeholder="<?php echo "$row[8]";?>"> 
+                    <input type="text" class="form-control mb-3" id="DOBSignup" name="dob" placeholder="<?php echo decrypt($row[8]);?>"> 
                     <p class="wrong_input" id="wrong_date">El formato de la fecha no es correcto</p>
                     <label id="DNI" for="DNISignup" class="form-label">DNI</label>
-                    <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder="<?php echo "$row[0]";?>" disabled>
+                    <input type="text" class="form-control mb-3" id="DNISignup" name="dni" placeholder="<?php echo decrypt($row[0]);?>" disabled>
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Modificar</button>
 
                     <input type="hidden" id="InputToken" name="token" value="<?php echo $_SESSION['token']?>">

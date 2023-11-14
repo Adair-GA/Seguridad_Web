@@ -2,6 +2,18 @@
 session_start();
 include "../dbconn.php";
 
+function decrypt(string $ciphertext){
+    
+    $cipher = "aes-256-cbc";
+    $key = file_get_contents('../openssl/key.txt');
+    $iv = file_get_contents('../openssl/iv.txt');
+    $iv = base64_decode($iv);
+
+    $output = openssl_decrypt(base64_decode($ciphertext), $cipher, $key, 0, $iv);
+
+    return $output;
+}
+
 $token = $_REQUEST['token'];
 if ($token==$_SESSION['token']){
     $usuario = $_REQUEST['email'];

@@ -5,41 +5,28 @@ include "../dbconn.php";
 function encrypt(string $plaintext){
 
     //$key should have been previously generated in a cryptographically safe way, like openssl_random_pseudo_bytes
-    $cipher = "aes-128-gcm";
+    $cipher = "aes-256-cbc";
     
     $key = file_get_contents('../openssl/key.txt');
     $ivlen = file_get_contents('../openssl/ivlen.txt');
     $iv = file_get_contents('../openssl/iv.txt');
+    $iv = base64_decode($iv);
     // Write the contents back to the file
-
-    if (in_array($cipher, openssl_get_cipher_methods()))
-    {
-        //$ivlen = openssl_cipher_iv_length($cipher);
-        //$iv = openssl_random_pseudo_bytes($ivlen);
-        //file_put_contents('../ivlen.txt', $ivlen);
-        //file_put_contents('../iv.txt', $iv);
-        $ciphertext = openssl_encrypt($plaintext, $cipher, $key, $options=0, $iv, $tag);
-        //echo $ciphertext."\n";
-        //store $cipher, $iv, and $tag for decryption later
-        
-    }
-
-    return $ciphertext;
+    $output = openssl_encrypt($plaintext, $cipher, $key, 0, $iv);
+    $output = base64_encode($output);
+    return $output;
 }
 
 function decrypt(string $ciphertext){
     
-    $cipher = "aes-128-gcm";
+    $cipher = "aes-256-cbc";
     $key = file_get_contents('../openssl/key.txt');
     $iv = file_get_contents('../openssl/iv.txt');
+    $iv = base64_decode($iv);
 
-    if (in_array($cipher, openssl_get_cipher_methods()))
-    {
-        $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv, $tag);
-    //echo $original_plaintext."\n";
-    }
+    $output = openssl_decrypt(base64_decode($ciphertext), $cipher, $key, 0, $iv);
 
-    return $original_plaintext;
+    return $output;
 }
 
 //password_hash() ?
@@ -72,11 +59,6 @@ if ($token==$_SESSION['token']){
     $telefono = $_REQUEST['phone'];
     $fecha_nacimiento = $_REQUEST['dob'];
     $dni = $_REQUEST['dni'];
-
-    $dni = encrypt($dni);
-    $dni = decrypt($dni);
-    echo $dni;
-    $dni = encrypt($dni);
 
     $query = "SELECT count(nombre) FROM usuarios WHERE usuario= ?";
     $query2 = "SELECT count(nombre) FROM usuarios WHERE dni= ?";
