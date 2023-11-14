@@ -2,21 +2,14 @@
 ini_set("session.cookie_httponly", True);
 ini_set("session.cookie_samesite","Strict");
 session_start();
-//setcookie('session.cookie', '1', 0, '/; samesite=strict');
-/*session_start([
-    'cookie_httponly' => true,
-    'cookie_samesite' => 'Strict',
 
-]);*/
-
-//setcookie('SESSION',  'cookie_value', ['samesite' => 'Strict']);
 $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar una sesión (login) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' cdn.jsdelivr.net *.cdn.jsdelivr.net">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' cdn.jsdelivr.net">
     <title>Euskor&oacute;scopo</title> <!--Título de la pestaña--->    
 
     <!--Importar estilo CSS, antes se empleaba DataTable de JQuery, actualmente una tabla propia-->

@@ -16,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' cdn.jsdelivr.net *.cdn.jsdelivr.net">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' cdn.jsdelivr.net">
     <title>Web Login</title> <!--Título de la pestaña--->
 
     <!--Importar estilo CSS-->

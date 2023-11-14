@@ -2,6 +2,42 @@
 session_start();
 include "../dbconn.php";
 
+function encrypt(string $plaintext){
+
+    //$key should have been previously generated in a cryptographically safe way, like openssl_random_pseudo_bytes
+    $cipher = "aes-128-gcm";
+    
+    $key = file_get_contents('../openssl/key.txt');
+    $ivlen = file_get_contents('../openssl/ivlen.txt');
+    $iv = file_get_contents('../openssl/iv.txt');
+    // Write the contents back to the file
+
+    if (in_array($cipher, openssl_get_cipher_methods()))
+    {
+        //$ivlen = openssl_cipher_iv_length($cipher);
+        //$iv = openssl_random_pseudo_bytes($ivlen);
+        //file_put_contents('../ivlen.txt', $ivlen);
+        //file_put_contents('../iv.txt', $iv);
+        $ciphertext = openssl_encrypt($plaintext, $cipher, $key, $options=0, $iv, $tag);
+        //echo $ciphertext."\n";
+        //store $cipher, $iv, and $tag for decryption later
+        
+    }
+
+    return $ciphertext;
+}
+
+function decrypt(string $ciphertext){
+    
+    $cipher = "aes-128-gcm";
+    $key = file_get_contents('../openssl/key.txt');
+    $iv = file_get_contents('../openssl/iv.txt');
+    $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv, $tag);
+    //echo $original_plaintext."\n";
+
+    return $original_plaintext;
+}
+
 //password_hash() ?
 function getSalt(int $n) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -55,6 +91,13 @@ if ($token==$_SESSION['token']){
         echo "DNI repetido, por favor introduzca otro DNI";
     }
     else{
+        $nombre = encrypt($nombre);
+        $apellido = encrypt($apellido);
+        $email = encrypt($email);
+        $telefono = encrypt($telefono);
+        $fecha_nacimiento = encrypt($fecha_nacimiento);
+        $dni = encrypt($dni);
+
         $query = "INSERT INTO usuarios (dni, nombre, apellidos, usuario, contraseña, sal, email, telefono, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
         mysqli_stmt_bind_param($stmt, "sssssssss", $dni, $nombre, $apellido, $usuario, $contrasena, $salt, $email, $telefono, $fecha_nacimiento);
