@@ -43,7 +43,7 @@ CREATE TABLE `horoscopos` (
 --
 
 CREATE TABLE `usuarios` (
-  `dni` varchar(255) NOT NULL,
+  `dni` tinytext NOT NULL,
   `nombre` tinytext NOT NULL,
   `apellidos` tinytext NOT NULL,
   `usuario` tinytext NOT NULL,

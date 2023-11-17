@@ -125,14 +125,14 @@
             $query = substr($query,0,-1);  
             $query.=" WHERE dni = ?";
             $types.="s";
-            array_push($params, encrypt($dni));
+            array_push($params, $dni);
             $query.=";";
 
             $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
             mysqli_stmt_bind_param($stmt, $types, ...$params);
             $result = mysqli_stmt_execute($stmt);
 
-            if(mysqli_stmt_affected_rows($stmt) > 0){ // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
+            if($result){ // Si hay resultado, es decir, si se ha podido actualizar, todo correcto
                 echo "success";
             } else {
                 echo "fail";
