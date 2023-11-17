@@ -1,67 +1,38 @@
 async function update(event){
     event.preventDefault();
-    sql = "UPDATE `horoscopos` SET ";
-    // Creamos una sentencia SQL a medida para acceder y modificar aquellos datos que se hayan especificado.
-    sql = fill_fields(sql);
-    if (sql == "UPDATE `horoscopos` SET "){
-        alert("No se ha modificado ningún campo"); //al concatenar nunca se dará este caso, se mantiene por seguridad.
+    id = getId();
+
+    if (!checkDate()){
+        alert("Fecha incorrecta");
         return;
     }
 
-    id=getId();
-    sql = sql.slice(0,-1).concat(" WHERE id = ", id).concat(";"); // Con slice quitamos el último carácter, que es una coma
-    sql = sql.concat(document.getElementById('InputToken').value);
-    res = await fetch('/api/update_entry.php', {
-        method: 'POST',
-        body: sql
-    })
-    res = await res.text();
-    if (res != 'success') {
-        alert(res);
-    }else{
-        alert("Actualización realizada con éxito");
-        window.location.reload();
-    }
-}
+    data = new FormData();
+    data.append("name", document.signUp.name.value.trim() || document.signUp.name.getAttribute("placeholder"));
+    data.append("dob", document.signUp.dob.value.trim() || document.signUp.dob.getAttribute("placeholder"));
+    data.append("signosolar", document.signUp.signosolar.value.trim() );
+    data.append("signolunar", document.signUp.signolunar.value.trim());
+    data.append("retrogrado", document.signUp.retrogrado.value.trim());
 
-function fill_fields(sql){
-    /*Se genera una sentencia SQL a medida con sólo aquellos datos que se desean cambiar,
-    los datos cuyas casillas se hayan dejado en blanco no se sustituyen, menos accesos a
-    la DB*/
-    try{
-        replacer=document.signUp.name.value.trim(); //.trim() elimina los espacios en blanco en ambos extremos dle string
-        if (replacer!=""){
-            sql = sql.concat(" nombre = '", replacer).concat("',");
+    res = await fetch(
+        "/api/update_entry.php?id=" + id,
+        {
+            method: "POST",
+            body: data
         }
-        
-        replacer=document.signUp.dob.value.trim();
-        if (replacer!=""){
-            sql = sql.concat(" fecha_nacimiento = '", replacer).concat("',");
-        }
-        
-        replacer=document.signUp.signosolar.value.trim();
-        if (replacer!=""){
-            sql = sql.concat(" signo_solar = '", replacer).concat("',");
-        }
-        
-        replacer=document.signUp.signolunar.value.trim();
-        if (replacer!=""){
-            sql = sql.concat(" signo_lunar = '", replacer).concat("',");
-        }
-        
-        replacer=document.signUp.retrogrado.value.trim();
-        if (document.signUp.retrogrado.value.trim() == 'Si'){result='1';}
-        else{result='0';}
-        sql = sql.concat(" mercurio_retrogrado = '", result).concat("',");
+    );
+    r_text = await res.text();
+    alert(r_text);
+    if (r_text == "OK"){
+        window.location.href = "/index.php";
     }
-    catch(err){
-        console.log(err);
-    }
-    return sql;
 }
 
 function checkDate(){
     var date= document.signUp.DOBSignup.value.trim();
+    if (date==""){
+        return true;
+    }
     /*Validamos la fecha con la siguiente expresión Regex, que indica
     que será un formato de:
         4 números del 0 al 9 cada uno
