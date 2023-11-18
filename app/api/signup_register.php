@@ -7,7 +7,7 @@ function encrypt(string $plaintext){
     //$key should have been previously generated in a cryptographically safe way, like openssl_random_pseudo_bytes
     $cipher = "aes-256-cbc";
     
-    $key = file_get_contents('../openssl/key.txt');
+    $key = file_get_contents('../openssl/key.pem');
     $ivlen = file_get_contents('../openssl/ivlen.txt');
     $iv = file_get_contents('../openssl/iv.txt');
     $iv = base64_decode($iv);
@@ -20,7 +20,7 @@ function encrypt(string $plaintext){
 function decrypt(string $ciphertext){
     
     $cipher = "aes-256-cbc";
-    $key = file_get_contents('../openssl/key.txt');
+    $key = file_get_contents('../openssl/key.pem');
     $iv = file_get_contents('../openssl/iv.txt');
     $iv = base64_decode($iv);
 

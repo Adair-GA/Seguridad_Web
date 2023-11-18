@@ -5,7 +5,7 @@ include "../dbconn.php";
 function decrypt(string $ciphertext){
     
     $cipher = "aes-256-cbc";
-    $key = file_get_contents('../openssl/key.txt');
+    $key = file_get_contents('../openssl/key.pem');
     $iv = file_get_contents('../openssl/iv.txt');
     $iv = base64_decode($iv);
 
