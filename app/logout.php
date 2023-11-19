@@ -1,5 +1,9 @@
 <?php
     session_start(); //Accedemos a la sesión iniciada
+    $log = fopen("logs/log.txt", "a");
+    $today = date("Y-m-d H:i:s"); 
+    fwrite($log, "[$today] logout: " . $_SESSION['usuario'] . " " . $_SERVER['REMOTE_ADDR'] . "\n");
+    fclose($log);
     session_destroy(); //Cerramos la sesión PHP
     header("Location: index.php");
     /* 

@@ -50,12 +50,16 @@ if (/*$data && */hash_equals($token, $_SESSION['token'])){
         $_SESSION['dni'] = $row[2];
         $_SESSION['token'] = bin2hex(random_bytes(24));
         echo "Login correcto";
+        $mss = "login";
+        $user = $row[1];
     } else {
         echo "Login incorrecto";
+        $mss = "login attempt";
+        $user = $usuario;
     }
     $log = fopen("../logs/log.txt", "a");
     $today = date("Y-m-d H:i:s"); 
-    fwrite($log, "[$today] Login: " . $row[1] . " " . $_SERVER['REMOTE_ADDR'] . "\n");
+    fwrite($log, "[$today] $mss: " . $user . " " . $_SERVER['REMOTE_ADDR'] . "\n");
     fclose($log);
 }else{
     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
