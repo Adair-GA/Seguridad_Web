@@ -1,8 +1,8 @@
 <?php
-session_start();
 include "../dbconn.php";
+session_start();
 
-/*$recaptchaSecretKey = "6LeYZhMpAAAAAOUV5bx_RdP4Z0JaNHgkn9vUO5qe";
+/*$recaptchaSecretKey = "6LeBqxQpAAAAADp0d29iwHGbbCKGibXwBrb5cwv9";
 $response = $_POST['g-recaptcha-response'];
 $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecretKey}&response={$response}");
 $data = json_decode($verify);*/
