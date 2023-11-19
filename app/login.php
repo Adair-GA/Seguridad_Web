@@ -6,7 +6,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' cdn.jsdelivr.net">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' cdn.jsdelivr.net www.google.com www.gstatic.com">
     <title>Web Login</title> <!--Título de la pestaña--->  
 
     <!--Importar estilo CSS, antes se empleaba DataTable de JQuery, actualmente una tabla propia-->
@@ -16,6 +16,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));
     <!--Importar código JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/login.js"></script>
+    <!--<script src="https://www.google.com/recaptcha/api.js" async defer></script>-->
 
     <!--Se usa una plantilla de Bootstrap para el estilo CSS del sistema-->
     <!--También se implementa CSS propio para un propósitos muy determinados y específicos-->
@@ -46,9 +47,13 @@ $_SESSION['token'] = bin2hex(random_bytes(24));
                 <input class="form-control mb-3" id="InputEmail" describedby="emailHelp">
                 <label for="InputPassword" class="form-label">Password</label>
                 <input type="password" class="form-control mb-3" id="InputPassword">
-                <button type="submit" class="btn btn-primary" id="LogInButton">Login</button>
 
+                <!--<div class="g-recaptcha" data-sitekey="6LeYZhMpAAAAADVU52GhBcTYA2ObF3gOdNSrSC05"></div><br>-->
+                <button type="submit" class="btn btn-primary" id="LogInButton">Login</button>
+                
                 <input type="hidden" id="InputToken" name="token" value="<?php echo $_SESSION['token']?>">
+                
+                
             </form>
         </div>
         <hr>
@@ -69,7 +74,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));
                     <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email">
                     <p class="wrong_input" id="wrong_email">El formato del email no es correcto</p>
                     <label for="PhoneSignup" class="form-label">Telefono</label>
-                    <input type="tel" class="form-control mb-3" placeholder="9 Digitos" id="PhoneSignup" name="phone">
+                    <input type="tel" class="form-control mb-3" placeholder="9 Digitos" id="PhoneSignup" name="phone" maxlength="9">
                     <p class="wrong_input" id="wrong_tel">El formato del numero de telefono no es correcto</p>
                     <label for="DOBSignup" class="form-label">Fecha de nacimiento:</label>
                     <input type="text" class="form-control mb-3" id="DOBSignup" placeholder="aaaa-mm-dd" name="dob"> 
@@ -77,6 +82,8 @@ $_SESSION['token'] = bin2hex(random_bytes(24));
                     <label for="DNISignup" class="form-label">DNI (no podrá modificarse)</label>
                     <input type="text" class="form-control mb-3" id="DNISignup" placeholder="12345678-Z" name="dni">
                     <p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>
+
+                    <div class="g-recaptcha" data-sitekey="6LeYZhMpAAAAADVU52GhBcTYA2ObF3gOdNSrSC05"></div><br>
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Registro</button>
             
                     <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">

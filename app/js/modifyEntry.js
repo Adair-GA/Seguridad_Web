@@ -13,6 +13,7 @@ async function update(event){
     data.append("signosolar", document.signUp.signosolar.value.trim() );
     data.append("signolunar", document.signUp.signolunar.value.trim());
     data.append("retrogrado", document.signUp.retrogrado.value.trim());
+    data.append("token", document.signUp.InputToken.value.trim());
 
     res = await fetch(
         "/api/update_entry.php?id=" + id,
@@ -22,9 +23,12 @@ async function update(event){
         }
     );
     r_text = await res.text();
-    alert(r_text);
+    //alert(r_text);
     if (r_text == "OK"){
+        alert("Actualización realizada con éxito");
         window.location.href = "/index.php";
+    }else{
+        alert("Ha ocurrido un error, recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
     }
 }
 

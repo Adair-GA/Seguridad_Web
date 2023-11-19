@@ -2,20 +2,13 @@
 session_start();
 include "../dbconn.php";
 
-function decrypt(string $ciphertext){
-    
-    $cipher = "aes-256-cbc";
-    $key = file_get_contents('../openssl/key.pem');
-    $iv = file_get_contents('../openssl/iv.txt');
-    $iv = base64_decode($iv);
-
-    $output = openssl_decrypt(base64_decode($ciphertext), $cipher, $key, 0, $iv);
-
-    return $output;
-}
+/*$recaptchaSecretKey = "6LeYZhMpAAAAAOUV5bx_RdP4Z0JaNHgkn9vUO5qe";
+$response = $_POST['g-recaptcha-response'];
+$verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecretKey}&response={$response}");
+$data = json_decode($verify);*/
 
 $token = $_REQUEST['token'];
-if ($token==$_SESSION['token']){
+if (/*$data && */hash_equals($token, $_SESSION['token'])){
     $usuario = $_REQUEST['email'];
     $contrasena = $_REQUEST['password'];
 
@@ -46,7 +39,8 @@ if ($token==$_SESSION['token']){
     }
 }else{
     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+    echo "ERROR";
     exit;
-}
+} 
 
 ?>

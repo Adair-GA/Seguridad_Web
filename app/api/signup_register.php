@@ -1,33 +1,8 @@
 <?php
 session_start();
 include "../dbconn.php";
-
-function encrypt(string $plaintext){
-
-    //$key should have been previously generated in a cryptographically safe way, like openssl_random_pseudo_bytes
-    $cipher = "aes-256-cbc";
-    
-    $key = file_get_contents('../openssl/key.pem');
-    $ivlen = file_get_contents('../openssl/ivlen.txt');
-    $iv = file_get_contents('../openssl/iv.txt');
-    $iv = base64_decode($iv);
-    // Write the contents back to the file
-    $output = openssl_encrypt($plaintext, $cipher, $key, 0, $iv);
-    $output = base64_encode($output);
-    return $output;
-}
-
-function decrypt(string $ciphertext){
-    
-    $cipher = "aes-256-cbc";
-    $key = file_get_contents('../openssl/key.pem');
-    $iv = file_get_contents('../openssl/iv.txt');
-    $iv = base64_decode($iv);
-
-    $output = openssl_decrypt(base64_decode($ciphertext), $cipher, $key, 0, $iv);
-
-    return $output;
-}
+include "../encryption.php";
+$filesPath = '../openssl/';
 
 //password_hash() ?
 function getSalt(int $n) {
@@ -43,7 +18,7 @@ function getSalt(int $n) {
 }
 
 $token = $_REQUEST['token'];
-if ($token==$_SESSION['token']){
+if (hash_equals($token, $_SESSION['token'])){
     // login.js línea 106, usamos método POST, tendremos que recibir body de alguna forma
     // se recibe el body a través de los $_REQUEST
     $nombre = $_REQUEST['name'];
@@ -65,6 +40,7 @@ if ($token==$_SESSION['token']){
     $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
     $stmt2 = mysqli_prepare($conn, $query2) or die (mysqli_error($conn));
     mysqli_stmt_bind_param($stmt, "s", $usuario);
+    $dni=encryption\encrypt($dni, $filesPath);
     mysqli_stmt_bind_param($stmt2, "s", $dni);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -82,12 +58,12 @@ if ($token==$_SESSION['token']){
         echo "DNI repetido, por favor introduzca otro DNI";
     }
     else{
-        $nombre = encrypt($nombre);
-        $apellido = encrypt($apellido);
-        $email = encrypt($email);
-        $telefono = encrypt($telefono);
-        $fecha_nacimiento = encrypt($fecha_nacimiento);
-        $dni = encrypt($dni);
+        $nombre = encryption\encrypt($nombre, $filesPath);
+        $apellido = encryption\encrypt($apellido, $filesPath);
+        $email = encryption\encrypt($email, $filesPath);
+        $telefono = encryption\encrypt($telefono, $filesPath);
+        $fecha_nacimiento = encryption\encrypt($fecha_nacimiento, $filesPath);
+        //$dni = encryption\encrypt($dni, $filesPath);
 
         $query = "INSERT INTO usuarios (dni, nombre, apellidos, usuario, contraseña, sal, email, telefono, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
@@ -101,7 +77,8 @@ if ($token==$_SESSION['token']){
     }   
 }else{
     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+    echo "ERROR";
     exit;
-}
+} 
 
 ?>

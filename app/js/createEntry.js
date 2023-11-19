@@ -31,7 +31,7 @@ async function sendData(event) {
         }
         else{
             //Si la entrada no se ha creado correctamente, mostrar mensaje de error.
-            alert("Error al crear la entrada");
+            alert("Error al crear la entrada. Recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
         }
     }
 }   

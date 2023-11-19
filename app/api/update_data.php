@@ -1,36 +1,8 @@
 <?php
     session_start();
     include '../dbconn.php';
+    include '../encryption.php';
     
-    function encrypt(string $plaintext){
-
-        //$key should have been previously generated in a cryptographically safe way, like openssl_random_pseudo_bytes
-        $cipher = "aes-256-cbc";
-        
-        $key = file_get_contents('../openssl/key.pem');
-        $ivlen = file_get_contents('../openssl/ivlen.txt');
-        $iv = file_get_contents('../openssl/iv.txt');
-        $iv = base64_decode($iv);
-        // Write the contents back to the file
-        $output = openssl_encrypt($plaintext, $cipher, $key, 0, $iv);
-        $output = base64_encode($output);
-        return $output;
-    }
-    
-    function decrypt(string $ciphertext){
-        
-        $cipher = "aes-256-cbc";
-        $key = file_get_contents('../openssl/key.pem');
-        $iv = file_get_contents('../openssl/iv.txt');
-        $iv = base64_decode($iv);
-    
-        $output = openssl_decrypt(base64_decode($ciphertext), $cipher, $key, 0, $iv);
-    
-        return $output;
-    }
-    
-
-
     function getSalt() {
         include '../dbconn.php';
         $userForSalt = $_SESSION['usuario'];
@@ -45,7 +17,7 @@
     }
 
     $token = $_REQUEST['token'];
-    if ($token==$_SESSION['token']){
+    if (hash_equals($token, $_SESSION['token'])){
         
         $nombre = $_REQUEST['name'];
         $apellido = $_REQUEST['surname'];
@@ -56,12 +28,14 @@
         $fecha_nacimiento = $_REQUEST['dob'];
         $dni = $_REQUEST['dniPlace'];
 
+        $filesPath= '../openssl/';
+
         $query = "UPDATE `usuarios` SET";
         $types = "";
         $params = array();
 
         if ($nombre!=""){
-            $nombre = encrypt($nombre);
+            $nombre = encryption\encrypt($nombre, $filesPath);
             $add=" nombre = ?";
             $query.=$add;
             $query.=",";
@@ -69,7 +43,7 @@
             array_push($params, $nombre);
         }
         if ($apellido!=""){
-            $apellido = encrypt($apellido);
+            $apellido = encryption\encrypt($apellido, $filesPath);
             $add=" apellidos = ?";
             $query.=$add;
             $query.=",";
@@ -77,7 +51,7 @@
             array_push($params, $apellido);
         }
         if ($telefono!=""){
-            $telefono = encrypt($telefono);
+            $telefono = encryption\encrypt($telefono, $filesPath);
             $add=" telefono = ?";
             $query.=$add;
             $query.=",";
@@ -85,7 +59,7 @@
             array_push($params, $telefono);
         }
         if ($email!=""){
-            $email = encrypt($email);
+            $email = encryption\encrypt($email, $filesPath);
             $add=" email = ?";
             $query.=$add;
             $query.=",";
@@ -93,7 +67,7 @@
             array_push($params, $email);
         }
         if ($fecha_nacimiento!=""){
-            $fecha_nacimiento = encrypt($fecha_nacimiento);
+            $fecha_nacimiento = encryption\encrypt($fecha_nacimiento, $filesPath);
             $add=" fecha_nacimiento = ?";
             $query.=$add;
             $query.=",";
@@ -125,7 +99,7 @@
             $query = substr($query,0,-1);  
             $query.=" WHERE dni = ?";
             $types.="s";
-            array_push($params, encrypt($dni));
+            array_push($params, encryption\encrypt($dni, $filesPath));
             $query.=";";
 
             $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
@@ -138,5 +112,9 @@
                 echo "fail";
             }
         }
-    }
+    }else{
+        header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+        echo "ERROR";
+        exit;
+    } 
 ?>

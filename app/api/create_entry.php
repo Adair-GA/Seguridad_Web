@@ -3,7 +3,7 @@ session_start();
 include "../dbconn.php";
 
 $token = $_REQUEST['token'];
-if ($token==$_SESSION['token']){
+if (hash_equals($token, $_SESSION['token'])){
     $nombre = $_REQUEST['name'];
     $fecha_nacimiento = $_REQUEST['dob'];
     $signosolar = $_REQUEST['signosolar'];
@@ -28,8 +28,9 @@ if ($token==$_SESSION['token']){
     }
 }else{
     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+    echo "ERROR";
     exit;
-}
+} 
 
 ?>
 

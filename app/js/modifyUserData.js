@@ -138,10 +138,14 @@ async function update(event){
             body: fd
         })
         res = await res.text();
-        if (res != 'success') {
-            alert(res);
-        }else{
+        if (res == 'ERROR' || res == 'fail') {
+            alert("Ha ocurrido un error, recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
+    
+        }else if (res == 'success'){
             alert("Actualización realizada con éxito");
+            window.location.reload();
+        }else{
+            alert(res);
             window.location.reload();
         }
     }

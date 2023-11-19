@@ -151,7 +151,9 @@ async function register(event){
     console.log(res)
     if (res != 'Usuario registrado correctamente') {
         alert(res);
-    }else{
+    }else if (res== 'ERROR'){
+        alert("Ha ocurrido un error, recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
+    }else {
         alert(res);
         window.location.reload()
     }
