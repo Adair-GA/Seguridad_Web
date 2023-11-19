@@ -11,10 +11,16 @@ $g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";
 
 session_start();
 
-/*$recaptchaSecretKey = "6LeBqxQpAAAAADp0d29iwHGbbCKGibXwBrb5cwv9";
+$g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";
 $response = $_POST['g-recaptcha-response'];
-$verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecretKey}&response={$response}");
-$data = json_decode($verify);*/
+$verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$g_recaptcha_secret}&response={$response}");
+$data = json_decode($verify);
+
+if ($data->success == false) {
+    header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+    echo "Captcha ERROR";
+    return;
+}
 
 $token = $_REQUEST['token'];
 if (/*$data && */hash_equals($token, $_SESSION['token'])){

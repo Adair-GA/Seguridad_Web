@@ -19,8 +19,8 @@ if(isset($_SESSION['dni'])){ //Para poder hacer login o registrarse no se puede 
 
     <!--Importar código JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <!--<script src="https://www.google.com/recaptcha/api.js" async defer></script>-->
 
     <!--Se usa una plantilla de Bootstrap para el estilo CSS del sistema-->
     <!--También se implementa CSS propio para un propósitos muy determinados y específicos-->
@@ -52,7 +52,7 @@ if(isset($_SESSION['dni'])){ //Para poder hacer login o registrarse no se puede 
                 <label for="InputPassword" class="form-label">Password</label>
                 <input type="password" class="form-control mb-3" id="InputPassword">
 
-                <!--<div class="g-recaptcha" data-sitekey="6LeBqxQpAAAAABuGRBE3e6ZVB0itBaIc9_yJn2mA"></div><br>-->
+                <div class="g-recaptcha" data-sitekey="6LfX2RQpAAAAAHFYBbSuD-Dq9Gkm5GHTcx6QLv-q"></div><br>
                 <button type="submit" class="btn btn-primary" id="LogInButton">Login</button>
                 
                 <input type="hidden" id="InputToken" name="token" value="<?php echo $_SESSION['token']?>">
@@ -87,7 +87,7 @@ if(isset($_SESSION['dni'])){ //Para poder hacer login o registrarse no se puede 
                     <input type="text" class="form-control mb-3" id="DNISignup" placeholder="12345678-Z" name="dni">
                     <p class="wrong_input" id="wrong_dni">El DNI no es correcto</p>
 
-                    <!--<div class="g-recaptcha" data-sitekey="6LeYZhMpAAAAADVU52GhBcTYA2ObF3gOdNSrSC05"></div><br>-->
+                    <div class="g-recaptcha" data-sitekey="6LfX2RQpAAAAAHFYBbSuD-Dq9Gkm5GHTcx6QLv-q"></div><br>
                     <button type="submit" id="SignUpButton" class="btn btn-primary">Registro</button>
             
                     <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">

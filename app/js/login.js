@@ -133,6 +133,7 @@ function checkDate(){
 // Función que se ejecuta al pulsar en Registrar.
 async function register(event){
     event.preventDefault();
+    var captcha = grecaptcha.getResponse(1);
     //if all the checks are true, submit the form via POST fetch to /api/signup_register.php
     try {
         if (!checkName() || !checkSurname() || !checkDNI() || !checkTel() || !checkDate()) {
@@ -143,9 +144,15 @@ async function register(event){
         console.log(error);
         return;
     }
+    if (captcha == '') {
+        alert ("Por favor, rellene el captcha");
+        return;
+    }
+    fd = new FormData(document.getElementById('signUpForm'))
+    fd.append('g-recaptcha-response', captcha)
     res = await fetch('/api/signup_register.php', {
         method: 'POST',
-        body: new FormData(document.getElementById('signUpForm'))
+        body: fd
     })
     res = await res.text();
     console.log(res)
@@ -214,6 +221,12 @@ async function login(event){
     event.preventDefault();
     //if all the checks are true, submit the form via POST fetch to /api/login.php
     fd = new FormData()
+    var captcha = grecaptcha.getResponse(0);
+    if (captcha == '') {
+        alert ("Por favor, rellene el captcha");
+        return;
+    }
+    fd.append('g-recaptcha-response', captcha)
     fd.append('email', document.getElementById('InputEmail').value)
     fd.append('password', document.getElementById('InputPassword').value)
     fd.append('token', document.getElementById('InputToken').value)

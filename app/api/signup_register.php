@@ -2,8 +2,10 @@
 session_start();
 include "../dbconn.php";
 include "../encryption.php";
+require_once "../recaptchalib.php";
 $filesPath = '../openssl/';
 
+$g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";
 //password_hash() ?
 function getSalt(int $n) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -25,6 +27,17 @@ if (hash_equals($token, $_SESSION['token'])){
     $apellido = $_REQUEST['surname'];
     $usuario = $_REQUEST['username'];
     $contrasena = $_REQUEST['password'];
+
+    $g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";
+    $response = $_POST['g-recaptcha-response'];
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$g_recaptcha_secret}&response={$response}");
+    $data = json_decode($verify);
+    
+    if ($data->success == false) {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+        echo "Captcha ERROR";
+        return;
+    }
 
     $salt = getSalt(6);
     $contrasena .= $salt;
