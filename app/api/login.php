@@ -1,5 +1,14 @@
 <?php
+
+use function encryption\encrypt;
+
 include "../dbconn.php";
+include "../encryption.php";
+require_once "../recaptchalib.php";
+$filesPath = '../openssl/';
+
+$g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";
+
 session_start();
 
 /*$recaptchaSecretKey = "6LeBqxQpAAAAADp0d29iwHGbbCKGibXwBrb5cwv9";
@@ -11,11 +20,12 @@ $token = $_REQUEST['token'];
 if (/*$data && */hash_equals($token, $_SESSION['token'])){
     $usuario = $_REQUEST['email'];
     $contrasena = $_REQUEST['password'];
+    $email = encrypt($_REQUEST['email'], $filesPath);
 
     // Obtenemos la sal del usuario, ¿si hay más de un usuario con el mismo nombre?
     $query = "SELECT sal FROM usuarios WHERE (usuario = ? OR email = ?)";
     $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
-    mysqli_stmt_bind_param($stmt, "ss", $usuario, $usuario);
+    mysqli_stmt_bind_param($stmt, "ss", $usuario, $email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_array($result);
@@ -24,7 +34,7 @@ if (/*$data && */hash_equals($token, $_SESSION['token'])){
 
     $query = "SELECT email, usuario, dni FROM usuarios WHERE (usuario = ? OR email = ?) AND contraseña = ?";
     $stmt = mysqli_prepare($conn, $query) or die (mysqli_error($conn));
-    mysqli_stmt_bind_param($stmt, "sss", $usuario, $usuario, $contrasena);
+    mysqli_stmt_bind_param($stmt, "sss", $usuario, $email, $contrasena);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_array($result);
