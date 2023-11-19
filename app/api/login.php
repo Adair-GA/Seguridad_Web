@@ -53,6 +53,10 @@ if (/*$data && */hash_equals($token, $_SESSION['token'])){
     } else {
         echo "Login incorrecto";
     }
+    $log = fopen("../logs/log.txt", "a");
+    $today = date("Y-m-d H:i:s"); 
+    fwrite($log, "[$today] Login: " . $row[1] . " " . $_SERVER['REMOTE_ADDR'] . "\n");
+    fclose($log);
 }else{
     header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
     echo "ERROR";
