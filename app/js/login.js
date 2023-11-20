@@ -156,10 +156,12 @@ async function register(event){
     })
     res = await res.text();
     console.log(res)
-    if (res != 'Usuario registrado correctamente') {
-        alert(res);
-    }else if (res== 'ERROR'){
+    if (res == 'ERROR' || res == 'Error al registrar el usuario') {
         alert("Ha ocurrido un error, recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
+        grecaptcha.reset();
+    }else if (res != 'Usuario registrado correctamente'){
+        alert(res);
+        grecaptcha.reset();
     }else {
         alert(res);
         window.location.reload()
@@ -237,11 +239,12 @@ async function login(event){
     console.log(res)
     res = await res.text();
     console.log(res)
-    if (res != 'Login correcto') {
+    if (res == 'ERROR'){
+        alert("Ha ocurrido un error, recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
+        grecaptcha.reset();
+    }else {
         alert(res);
-    }else{
-        alert(res);
-        window.location.reload()
+        window.location.reload();
     }
 }
 
