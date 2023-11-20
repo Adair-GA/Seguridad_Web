@@ -158,10 +158,10 @@ async function register(event){
     console.log(res)
     if (res == 'ERROR' || res == 'Error al registrar el usuario') {
         alert("Ha ocurrido un error, recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
-        grecaptcha.reset();
+        grecaptcha.reset(1);
     }else if (res != 'Usuario registrado correctamente'){
         alert(res);
-        grecaptcha.reset();
+        grecaptcha.reset(1);
     }else {
         alert(res);
         window.location.reload()
@@ -241,8 +241,23 @@ async function login(event){
     console.log(res)
     if (res == 'ERROR'){
         alert("Ha ocurrido un error, recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
-        grecaptcha.reset();
+        grecaptcha.reset(0);
     }else {
+        if (res == "Error: Usuario incorrecto")
+        {
+            alert("Usuario incorrecto");
+            document.getElementById('InputEmail').value = "";
+            document.getElementById('InputPassword').value = "";
+            grecaptcha.reset(0);
+            return;
+        }
+        if (res == "Error: Contraseña incorrecta")
+        {
+            alert("Contraseña incorrecta");
+            document.getElementById('InputPassword').value = "";
+            grecaptcha.reset(0);
+            return;
+        }
         alert(res);
         window.location.reload();
     }
