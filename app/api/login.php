@@ -23,7 +23,7 @@ if ($data->success == false) {
 }
 
 $token = $_REQUEST['token'];
-if (/*$data && */!hash_equals($token, $_SESSION['token'])){
+if (/*$data && */hash_equals($token, $_SESSION['token'])){
     $usuario = $_REQUEST['email'];
     $contrasena = $_REQUEST['password'];
     $email = encrypt($_REQUEST['email'], $filesPath);
