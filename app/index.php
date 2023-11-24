@@ -1,6 +1,7 @@
 <?php 
 ini_set("session.cookie_httponly", True);
 ini_set("session.cookie_samesite","Strict");
+//ini_set("session.cookie_domain","");
 session_start();
 
 $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar una sesión (login) -->
