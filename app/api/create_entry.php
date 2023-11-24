@@ -10,6 +10,16 @@ if (hash_equals($token, $_SESSION['token'])){
     $signolunar = $_REQUEST['signolunar'];
     $retrogrado = $_REQUEST['retrogrado'];
 
+    $g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";
+    $response = $_POST['g-recaptcha-response'];
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$g_recaptcha_secret}&response={$response}");
+    $data = json_decode($verify);
+
+    if ($data->success == false) {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+        echo "ERROR";
+        return;
+    }
 
     $boolRetrogrado = 0;
     if ($retrogrado == "Si") {

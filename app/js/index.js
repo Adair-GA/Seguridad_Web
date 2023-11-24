@@ -34,15 +34,6 @@ async function deleteEntry(id,name,signo){
 document.addEventListener('DOMContentLoaded', (event) => {
     let btns = document.querySelectorAll('button');
     let index = 1;
-    /*for (i of btns) {
-        if (i.getAttribute("data-type")=="edit"){
-            i.addEventListener('click', () => { 
-                alert(i.getAttribute("data-id"))});
-        }else{
-            i.addEventListener('click', deleteEntry2);
-        }
-        index++;
-    }*/
 
     for (i of btns) {
         (function(i) {

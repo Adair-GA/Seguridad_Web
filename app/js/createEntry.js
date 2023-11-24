@@ -6,7 +6,12 @@ addEventListener('DOMContentLoaded', (event) => {
 
 async function sendData(event) {
     event.preventDefault();
-     
+
+    var captcha = grecaptcha.getResponse(0);
+    if (captcha == '') {
+        alert ("Por favor, rellene el captcha");
+        return;
+    }
     if (!checkDate()){
         //Si el formato de la fecha es incorrecto, mostrar mensaje error.
         document.getElementById("wrong_date").style.display = "block";
@@ -14,7 +19,8 @@ async function sendData(event) {
     }
     else{
         //Si el formato de la fecha es correcto, proceder a crear la entrada en la DB.
-        const formData = new FormData(document.getElementById("entryForm"));
+        var formData = new FormData(document.getElementById("entryForm"));
+        formData.append('g-recaptcha-response', captcha)
 
         res = await fetch(
             "/api/create_entry.php",

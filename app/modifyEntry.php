@@ -5,7 +5,8 @@ $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' cdn.jsdelivr.net">
+    <meta http-equiv="Content-Security-Policy" content=" default-src 'self' cdn.jsdelivr.net www.google.com www.gstatic.com">
+
     <title>Modificar entrada - Euskoroscopo</title> <!--Título de la pestaña--->  
 
     <!--Importar estilo CSS, antes se empleaba DataTable de JQuery, actualmente una tabla propia-->
@@ -14,6 +15,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar
 
     <!--Importar código JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script type="text/javascript" src="js/modifyEntry.js"></script>
 
     <!--Se usa una plantilla de Bootstrap para el estilo CSS del sistema-->
@@ -97,6 +99,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar
                     </select>
 
                     <input type="hidden" id="InputToken" name="token" value="<?php echo $_SESSION['token']?>">
+                    <div class="g-recaptcha" data-sitekey="6LfX2RQpAAAAAHFYBbSuD-Dq9Gkm5GHTcx6QLv-q"></div><br>
                     <button type="submit" id="sendButton" class="btn btn-primary">Modificar</button>
             </form>
             <br>

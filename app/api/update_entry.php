@@ -11,6 +11,18 @@
     $id = $_REQUEST['id'];
     $token = $_REQUEST['token'];
 
+        
+    $g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";
+    $response = $_REQUEST['g-recaptcha-response'];
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$g_recaptcha_secret}&response={$response}");
+    $data = json_decode($verify);
+
+    if ($data->success == false) {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+        echo "ERROR";
+        return;
+    }
+
     if (hash_equals($token, $_SESSION['token'])){
         $sql = "UPDATE `horoscopos` SET nombre = ?, fecha_nacimiento = ?, signo_solar = ?, signo_lunar = ?, mercurio_retrogrado = ? WHERE id = ?";
         $stmt = mysqli_prepare($conn, $sql);

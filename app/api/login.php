@@ -7,8 +7,6 @@ include "../encryption.php";
 require_once "../recaptchalib.php";
 $filesPath = '../openssl/';
 
-$g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";
-
 session_start();
 
 $g_recaptcha_secret = "6LfX2RQpAAAAAMnwl8bOxvTaP-y-T0GZoBqzMpzu";

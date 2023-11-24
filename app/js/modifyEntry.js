@@ -6,7 +6,12 @@ async function update(event){
         alert("Fecha incorrecta");
         return;
     }
-
+    var captcha = grecaptcha.getResponse(0);
+    if (captcha == '') {
+        alert ("Por favor, rellene el captcha");
+        return;
+    }
+    
     data = new FormData();
     data.append("name", document.signUp.name.value.trim() || document.signUp.name.getAttribute("placeholder"));
     data.append("dob", document.signUp.dob.value.trim() || document.signUp.dob.getAttribute("placeholder"));
@@ -14,6 +19,7 @@ async function update(event){
     data.append("signolunar", document.signUp.signolunar.value.trim());
     data.append("retrogrado", document.signUp.retrogrado.value.trim());
     data.append("token", document.signUp.InputToken.value.trim());
+    data.append('g-recaptcha-response', captcha)
 
     res = await fetch(
         "/api/update_entry.php?id=" + id,
