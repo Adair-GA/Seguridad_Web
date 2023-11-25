@@ -66,6 +66,19 @@ function checkEmail(){
     return true;
 }
 
+function checkPassword(){
+    var pass= document.signUp.password.value.trim();
+    if (pass==""){return true;}
+    
+    let reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+    if (!reg.test(pass)){
+        return false;
+    }
+    return true;
+
+}
+
 function checkDate(){
     var date= document.signUp.DOBSignup.value.trim();
 
@@ -130,7 +143,7 @@ function checkDate(){
 async function update(event){
     event.preventDefault();
     //if all the checks are true, submit the form via POST fetch to /api/signup_register.php
-    if (checkName() && checkSurname() && checkDate() && checkEmail() && checkTel()){
+    if (checkName() && checkSurname() && checkDate() && checkEmail() && checkTel() && checkPassword()){
         fd = new FormData(document.getElementById('signUpForm'));
         fd.append('dniPlace', document.getElementById("DNISignup").getAttribute("placeholder"))
         res = await fetch('/api/update_data.php', {
@@ -194,6 +207,14 @@ function live_checkEmail(){
     }
 }
 
+function live_checkPassword(){
+    if (checkPassword()){
+        document.getElementById("wrong_password").style.display = "none";
+    }else{
+        document.getElementById("wrong_password").style.display = "block";
+    }
+}
+
 function live_checkDate(){
     if (checkDate()){
         document.getElementById("wrong_date").style.display = "none";
@@ -207,6 +228,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("NameSignup").addEventListener("keyup", live_checkName);
     document.getElementById("ApellidosSignup").addEventListener("keyup", live_checkSurname);
     document.getElementById("InputEmailSignup").addEventListener("keyup", live_checkEmail);
+    document.getElementById("InputPasswordSignup").addEventListener("keyup", live_checkPassword);
     document.getElementById("PhoneSignup").addEventListener("keyup", live_checkTel);
     document.getElementById("DOBSignup").addEventListener("keyup", live_checkDate);
     

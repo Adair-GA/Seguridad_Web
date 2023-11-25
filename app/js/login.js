@@ -74,6 +74,39 @@ function checkEmail(){
     return true;
 }
 
+function checkPassword(){
+    var pass= document.signUp.password.value.trim();
+    if (pass==""){return true;}
+    
+    /*
+        1- /: This marks the start and end of the regex pattern.
+        2- ^: This specifies that the pattern should start at the beginning of the string.
+        3- (?=.*[a-z]): This is a positive lookahead assertion that checks for the presence of at least one lower case letter. The .* means to match any character (except a newline) 0 or more times, and the [a-z] means to match any lower case letter. The positive lookahead assertion checks for the presence of this pattern, but does not consume it as part of the match.
+        4- (?=.*[A-Z]): This is a positive lookahead assertion that checks for the presence of at least one upper case letter. The .* means to match any character (except a newline) 0 or more times, and the [A-Z] means to match any upper case letter. The positive lookahead assertion checks for the presence of this pattern, but does not consume it as part of the match.
+        5- (?=.*\d): This is a positive lookahead assertion that checks for the presence of at least one digit. The .* means to match any character (except a newline) 0 or more times, and the \d means to match any digit (0-9). The positive lookahead assertion checks for the presence of this pattern, but does not consume it as part of the match.
+        6- (?=.*[@$!%*?&]): This is a positive lookahead assertion that checks for the presence of at least one special character. The .* means to match any character (except a newline) 0 or more times, and the [@$!%*?&] means to match any of the special characters listed. The positive lookahead assertion checks for the presence of this pattern, but does not consume it as part of the match.
+        7- [A-Za-z\d@$!%*?&]: This character set matches any upper or lower case letter, digit, or special character listed. It is used to specify the characters that can be matched as part of the password.
+        8- {8,}: This specifies that the preceding character set must be matched 8 or more times. This enforces the minimum length requirement for the password.
+        9- $: This specifies that the pattern should end at the end of the string.
+
+        ^                         Start anchor
+        (?=.*[A-Z].*[A-Z])        Ensure string has two uppercase letters.
+        (?=.*[!@#$&*])            Ensure string has one special case letter.
+        (?=.*[0-9].*[0-9])        Ensure string has two digits.
+        (?=.*[a-z].*[a-z].*[a-z]) Ensure string has three lowercase letters.
+        .{8}                      Ensure string is of length 8.
+        $                         End anchor.
+    */
+    
+    let reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+    if (!reg.test(pass)){
+        return false;
+    }
+    return true;
+
+}
+
 function checkDate(){
     var date= document.signUp.DOBSignup.value.trim();
     /*Validamos la fecha con la siguiente expresión Regex, que indica
@@ -136,7 +169,7 @@ async function register(event){
     var captcha = grecaptcha.getResponse(1);
     //if all the checks are true, submit the form via POST fetch to /api/signup_register.php
     try {
-        if (!checkName() || !checkSurname() || !checkDNI() || !checkTel() || !checkDate()) {
+        if (!checkName() || !checkSurname() || !checkDNI() || !checkTel() || !checkDate() || !checkPassword()) {
             return;
         }
     } catch (error) {
@@ -210,6 +243,14 @@ function live_checkEmail(){
     }
 }
 
+function live_checkPassword(){
+    if (checkPassword()){
+        document.getElementById("wrong_password").style.display = "none";
+    }else{
+        document.getElementById("wrong_password").style.display = "block";
+    }
+}
+
 function live_checkDate(){
     if (checkDate()){
         document.getElementById("wrong_date").style.display = "none";
@@ -268,6 +309,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("NameSignup").addEventListener("keyup", live_checkName);
     document.getElementById("ApellidosSignup").addEventListener("keyup", live_checkSurname);
     document.getElementById("InputEmailSignup").addEventListener("keyup", live_checkEmail);
+    document.getElementById("InputPasswordSignup").addEventListener("keyup", live_checkPassword);
     document.getElementById("PhoneSignup").addEventListener("keyup", live_checkTel);
     document.getElementById("DOBSignup").addEventListener("keyup", live_checkDate);
     document.getElementById("DNISignup").addEventListener("keyup", live_checkDNI);

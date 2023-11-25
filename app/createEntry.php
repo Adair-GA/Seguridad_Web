@@ -49,6 +49,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));
             <form name="entry" id="entryForm">
                     <label for="EntryName" class="form-label">Nombre:</label>
                     <input type="text" class="form-control mb-3" id="EntryName" name="name">
+                    <p class="wrong_input" id="wrong_name">Por favor, introduce un nombre</p>
 
                     <label for="EntrDOB" class="form-label">Fecha de nacimiento</label>
                     <input type="text" class="form-control mb-3" id="DOBSignup" placeholder="aaaa-mm-dd" name="dob"> 

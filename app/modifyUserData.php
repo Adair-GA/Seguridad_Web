@@ -63,6 +63,7 @@
                     <input class="form-control mb-3" id="UsernameSignup" name="username" placeholder="<?php echo "$row[3]";?>">
                     <label for="InputPasswordSignup" class="form-label">Contraseña</label>
                     <input type="password" class="form-control mb-3" id="InputPasswordSignup" name="password">
+                    <p class="wrong_input" id="wrong_password">Contraseña débil. <br> Debe contener al menos una minúscula, una mayúscula, un número y un caracter especial. <br>La longitud mínima es de 6 caracteres. </p>
                     <label for="InputEmailSignup" class="form-label">Direccion de correo</label>
                     <input type="email" class="form-control mb-3" id="InputEmailSignup" name="email" placeholder="<?php echo encryption\decrypt($row[6], $filesPath);?>">
                     <p class="wrong_input" id="wrong_email">El formato del email no es correcto</p>

@@ -48,7 +48,7 @@ $_SESSION['token'] = bin2hex(random_bytes(24));?> <!--Permite empezar o reanudar
                 <li class="nav-item"><a href="createEntry.php" class="nav-link">Crear entrada</a></li>
                 <?php
                 if (isset($_SESSION['email'])) {
-                    echo '<li class="nav-item"><a href="modifyUserData.php" class="nav-link" style="color:white">Modificar datos</a></li>';
+                    echo '<li class="nav-item"><a href="modifyUserData.php" class="nav-link">Modificar datos</a></li>';
                     echo '<li class="nav-item"><a href="logout.php" class="btn btn-danger">Logout</a></li>';
                 } else {
                     echo '<li class="nav-item"><a href="login.php" class="nav-link active">Login</a></li>';

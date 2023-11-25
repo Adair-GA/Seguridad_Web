@@ -1,5 +1,6 @@
 addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("DOBSignup").addEventListener("keyup", live_checkDate);
+    document.getElementById("EntryName").addEventListener("keyup", live_checkName);
     
     document.getElementById("sendButton").addEventListener("click", sendData);
 });
@@ -15,6 +16,10 @@ async function sendData(event) {
     if (!checkDate()){
         //Si el formato de la fecha es incorrecto, mostrar mensaje error.
         document.getElementById("wrong_date").style.display = "block";
+        return;
+    }
+    else if (!checkName()){
+        document.getElementById("wrong_name").style.display = "block";
         return;
     }
     else{
@@ -41,6 +46,12 @@ async function sendData(event) {
         }
     }
 }   
+
+function checkName(){
+    var date= document.entry.EntryName.value.trim();
+    if (date==""){return false}
+    else{return true;}
+}
 
 function checkDate(){
     var date= document.entry.DOBSignup.value.trim();
@@ -103,5 +114,15 @@ function live_checkDate(){
     }else{
         //mostrar mensaje de error
         document.getElementById("wrong_date").style.display = "block";
+    }
+}
+
+function live_checkName(){
+    if (checkName()){
+        //Ocultar mensaje de error
+        document.getElementById("wrong_name").style.display = "none";
+    }else{
+        //mostrar mensaje de error
+        document.getElementById("wrong_name").style.display = "block";
     }
 }
