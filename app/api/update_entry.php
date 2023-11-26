@@ -31,7 +31,7 @@
         if (mysqli_stmt_affected_rows($stmt) > 0) {
             echo "OK";
         } else {
-            echo "ERROR";
+            echo "SINCAMBIOS";
         }
     }else{
         header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');

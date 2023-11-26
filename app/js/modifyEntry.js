@@ -33,6 +33,8 @@ async function update(event){
     if (r_text == "OK"){
         alert("Actualización realizada con éxito");
         window.location.href = "/index.php";
+    }else if(r_text == "SINCAMBIOS"){
+        alert("No se ha modificado ningún campo");
     }else{
         alert("Ha ocurrido un error, recarga la página y vuelve a intentarlo. En caso de que el error persista, póngase en contacto con los administradores.");
     }
